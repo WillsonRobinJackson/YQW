@@ -1,0 +1,30 @@
+[ 2017-08-03T08:53:29+08:00 ] 127.0.0.1 /index.php?XDEBUG_SESSION_START=18257
+INFO: Cron:ClearPromotion Runat 2017-08-03 08:53:29 Use 0.111000 s 
+Cron:AutoApplyJobs Runat 2017-08-03 08:53:29 Use -0.006000 s 
+Cron:AutoRefreshResume Runat 2017-08-03 08:53:29 Use -0.017000 s 
+Cron:AutoRefreshJobs Runat 2017-08-03 08:53:29 Use -0.022000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-03 08:53:29 Use -0.024000 s 
+Cron:ClearOrder Runat 2017-08-03 08:53:29 Use -0.042000 s 
+
+[ 2017-08-03T09:04:47+08:00 ] 127.0.0.1 /index.php?m=&c=jobs&a=jobs_list&key=%E9%94%80%E5%94%AE&search_type=&citycategory=&jobcategory=&jobtag=&wage=&trade=&scale=&nature=&education=&experience=&settr=&lng=&lat=&p=3&page=3
+INFO: Cron:ClearPromotion Runat 2017-08-03 09:04:47 Use 0.027000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-03 09:04:47 Use 0.000000 s 
+
+[ 2017-08-03T09:20:11+08:00 ] 127.0.0.1 /index.php?XDEBUG_SESSION_START=10297
+INFO: Cron:AutoRefreshResume Runat 2017-08-03 09:20:11 Use 0.026000 s 
+Cron:AutoRefreshJobs Runat 2017-08-03 09:20:11 Use 0.000000 s 
+
+[ 2017-08-03T10:02:25+08:00 ] 127.0.0.1 /index.php?m=&c=index&a=index
+INFO: Cron:ClearPromotion Runat 2017-08-03 10:02:25 Use 0.018000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-03 10:02:25 Use 0.000000 s 
+
+[ 2017-08-03T10:10:06+08:00 ] 127.0.0.1 /index.php?m=&c=resume&a=resume_list&key=%E5%BC%80%E5%8F%91
+INFO: Cron:AutoRefreshResume Runat 2017-08-03 10:10:06 Use 0.019000 s 
+Cron:AutoRefreshJobs Runat 2017-08-03 10:10:06 Use 0.000000 s 
+
+[ 2017-08-03T14:42:18+08:00 ] 127.0.0.1 /index.php?m=&c=index&a=index
+INFO: Cron:ClearPromotion Runat 2017-08-03 14:42:18 Use 0.049000 s 
+Cron:AutoRefreshResume Runat 2017-08-03 14:42:18 Use -0.001000 s 
+Cron:AutoRefreshJobs Runat 2017-08-03 14:42:18 Use -0.005000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-03 14:42:18 Use -0.008000 s 
+

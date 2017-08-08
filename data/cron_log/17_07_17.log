@@ -1,0 +1,58 @@
+[ 2017-07-17T10:35:03+08:00 ] 127.0.0.1 /index.php?m=&c=company&a=jobs_apply
+INFO: Cron:ClearPromotion Runat 2017-07-17 10:35:03 Use 0.261000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 10:35:03 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 10:35:03 Use -0.006000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 10:35:03 Use -0.009000 s 
+
+[ 2017-07-17T11:17:47+08:00 ] 127.0.0.1 /index.php?m=&c=company&a=com_info
+INFO: Cron:ClearPromotion Runat 2017-07-17 11:17:47 Use 0.025000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 11:17:47 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 11:17:47 Use -0.002000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 11:17:47 Use -0.004000 s 
+
+[ 2017-07-17T13:38:08+08:00 ] 127.0.0.1 /index.php?m=admin&c=ajax&a=affair_stat
+INFO: Cron:ClearPromotion Runat 2017-07-17 13:38:07 Use 0.082000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 13:38:08 Use -0.001000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 13:38:08 Use -0.016000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 13:38:08 Use -0.018000 s 
+
+[ 2017-07-17T14:18:56+08:00 ] 127.0.0.1 /index.php?m=&c=index&a=index
+INFO: Cron:ClearPromotion Runat 2017-07-17 14:18:56 Use 0.110000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 14:18:56 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 14:18:56 Use -0.003000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 14:18:56 Use -0.004000 s 
+
+[ 2017-07-17T15:43:17+08:00 ] 127.0.0.1 /index.php?m=admin&c=index&a=left_menu&menuid=194
+INFO: Cron:ClearPromotion Runat 2017-07-17 15:43:17 Use 0.142000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 15:43:17 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 15:43:17 Use -0.006000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 15:43:17 Use -0.009000 s 
+
+[ 2017-07-17T15:43:17+08:00 ] 127.0.0.1 /index.php?m=admin&c=jobs&a=index
+INFO: Cron:ClearPromotion Runat 2017-07-17 15:43:17 Use 0.046000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 15:43:17 Use -0.001000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 15:43:17 Use -0.018000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 15:43:17 Use -0.020000 s 
+
+[ 2017-07-17T16:05:43+08:00 ] 127.0.0.1 /
+INFO: Cron:ClearPromotion Runat 2017-07-17 16:05:43 Use 0.141000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 16:05:43 Use -0.001000 s 
+
+[ 2017-07-17T16:26:21+08:00 ] 127.0.0.1 /index.php?XDEBUG_SESSION_START=19664
+INFO: Cron:AutoRefreshResume Runat 2017-07-17 16:26:21 Use 0.053000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 16:26:21 Use 0.000000 s 
+
+[ 2017-07-17T17:03:17+08:00 ] 127.0.0.1 /index.php?m=&c=company&a=index
+INFO: Cron:ClearPromotion Runat 2017-07-17 17:03:17 Use 0.099000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 17:03:17 Use -0.001000 s 
+
+[ 2017-07-17T17:10:48+08:00 ] 127.0.0.1 /index.php?m=admin&c=company&a=index
+INFO: Cron:AutoRefreshResume Runat 2017-07-17 17:10:48 Use 0.016000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 17:10:48 Use 0.000000 s 
+
+[ 2017-07-17T18:26:58+08:00 ] 127.0.0.1 /index.php?m=admin&c=index&a=index
+INFO: Cron:ClearPromotion Runat 2017-07-17 18:26:58 Use 0.031000 s 
+Cron:AutoRefreshResume Runat 2017-07-17 18:26:58 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-17 18:26:58 Use -0.004000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-17 18:26:58 Use -0.005000 s 
+

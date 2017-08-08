@@ -1,0 +1,297 @@
+@charset "utf-8";
+.big-box{
+  width: 100%;
+  background-color: #fff;
+  padding-bottom: 60px;
+}
+.center-box{
+  margin: 20px 15px;
+    border-radius: 5px;
+    background-color: #fff8db;
+}
+.center-box h2{
+  line-height: 26px;
+    padding: 10px 10px;
+    color: #994f18;
+    font-size: 16px;
+    text-align: center;
+    background-repeat: repeat-x;
+    background-size: 100% 1px;
+    background-position: left bottom;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0.5,transparent),color-stop(0.5,#e6d097));
+}
+.center-box p{
+  color: #ff8e0d;
+  font-size: 14px;
+    line-height: 20px;
+    padding: 8px 10px;
+}
+.center-box ul{
+  padding: 0 10px;
+}
+.center-box ul li{
+    position: relative;
+  background-repeat: repeat-x;
+    background-size: 100% 1px;
+    background-position: left bottom;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0.5,transparent),color-stop(0.5,#f3e3b1));
+    height: 45px;
+    line-height: 44px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+.center-box ul li label{
+  width: 80px;
+  font-size: 14px;
+  color: #333;
+}
+.center-box ul li .input-box{
+  position: relative;
+  margin-right: 20px;
+  background-color: transparent;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  -o-flex: 1;
+  flex: 1;
+  font-size: 14px;
+}
+.center-box ul li .input-boxs{
+  margin-right: 100px;
+  background-color: transparent;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  -o-flex: 1;
+  flex: 1;
+  font-size: 14px;
+}
+.center-box ul li .input-boxs input{
+  width: 100%;
+  background-color: transparent;
+  text-align: right;
+  font-size: 14px;
+}
+.center-box ul li .input-box input{
+  width: 100%;
+  position: absolute;
+  height: 44px;
+  line-height: 44px;
+  left: 0;
+  top: 0px;
+  z-index: 11;
+  background-color: transparent;
+  text-align: right;
+  font-size: 14px;
+
+}
+
+.center-box ul li.jt-cl:after {
+    content: " ";
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-width: 1px 1px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    position: relative;
+    top: -2px;
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    margin-top: -4px;
+}
+.center-box ul li .input-boxs button{
+  position: absolute;
+  right: 0;
+  top: 0;
+    height: 30px;
+    line-height: 30px;
+    width: 88px;
+    margin-top: 7px;
+    text-align: center;
+    font-size: 13px;
+    color: #f04d52;
+}
+.center-box ul li .input-boxs button:after{
+    border: 1px solid #f04d52;
+    content: "";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(0.5);
+    -webkit-transform-origin: 0 0;
+    padding: 1px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    -webkit-box-sizing: border-box;
+    -moz-transform: scale(0.5);
+    -moz-transform-origin: 0 0;
+    -moz-box-sizing: border-box;
+}
+
+.hui-line{
+  width: 100%;
+  height: 8px;
+  background-color: #f0f0f0;
+}
+.inter{
+  margin: 20px 15px;
+    background-color: #fff;
+    position: relative;
+}
+.inter h2{
+  font-size: 14px;
+  color: #333;
+  border-left: 3px solid #0f7dc8;
+  text-indent: 5px;
+  height: 20px;
+  line-height: 20px;
+}
+.inter .ganbu{
+  font-size: 16px;
+  line-height: 30px;
+  margin-top: 10px;
+}
+.inter .address{
+  font-size: 12px;
+  color: #666;
+}
+.inter .price{
+  line-height: 26px;
+  font-size: 13px;
+  color: #f00;
+}
+.inter small{
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.footer-fixed{
+    left:0;
+    background-color: #fafafa;
+    position: fixed;
+    bottom: -1px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    display: -webkit-box;
+    display: -moz-box;
+    padding-bottom: 1px;
+    z-index: 10;
+}
+.footer-fixed .share{
+  width: 19.2%;
+    height: 100%;
+    text-align: center;
+    max-width: 19.2%;
+    background-repeat: repeat-x;
+    background-size: 100% 1px;
+    background-position: left top;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.5,transparent),color-stop(0.5,#c6cacc));
+}
+.footer-fixed .share .text-c{
+      color: #666;
+      display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 31px;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 1;
+}
+.footer-fixed .share .text-c .scd-share{
+      background: url(../images/86.png) center center no-repeat;
+    background-size: 17px 16px;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 5px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.footer-fixed .scd-reserve{
+  height: 100%;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    display: block;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    background-repeat: repeat-x;
+    background-size: 100% 1px;
+    background-position: left top;
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.5,transparent),color-stop(0.5,#c6cacc));
+}
+.footer-fixed .scd-reserve .foot-apply-interv{
+  display: -webkit-box;
+    display: -moz-box;
+    width: 100%;
+    height: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+.footer-fixed .scd-reserve .foot-apply-interv .interv-but{
+      display: block;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    height: 100%;
+    padding: 0;
+    font-size: 15px;
+    color: #fff;
+    background-color: #ffa902;
+    border-radius: 4px;
+}
+.footer-fixed .scd-reserve .foot-apply-interv .interv-but i{
+
+    width: 25px;
+    background: url(../images/xc264_6.png) center center no-repeat;
+    background-size: 25px 21px;
+    display: inline-block;
+    height: 21px;
+    vertical-align: middle;
+    margin-top: -4px;
+    margin-right: 10px;
+}
+.footer-fixed .scd-reserve .foot-apply-interv .interv-but:active{
+  opacity: .8;
+  filter: alpha(opacity=80);
+}
+.puts_emalis {
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 100%;
+    text-align: right;
+    border-radius: 5px;
+    height: 3.0em;
+    line-height: 3.0em;
+    background-color: transparent;
+    display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mui-backdrop {
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.3);
+}

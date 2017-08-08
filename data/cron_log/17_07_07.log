@@ -1,0 +1,14 @@
+[ 2017-07-07T16:19:29+08:00 ] ::1 /index.php
+INFO: Cron:ClearPromotion Runat 2017-07-07 16:19:29 Use 0.481000 s 
+Cron:AutoApplyJobs Runat 2017-07-07 16:19:29 Use -0.012000 s 
+Cron:AutoRefreshResume Runat 2017-07-07 16:19:29 Use -0.070000 s 
+Cron:AutoRefreshJobs Runat 2017-07-07 16:19:29 Use -0.096000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-07 16:19:29 Use -0.097000 s 
+Cron:ClearOrder Runat 2017-07-07 16:19:29 Use -0.145000 s 
+
+[ 2017-07-07T17:35:54+08:00 ] ::1 /index.php?m=&c=members&a=logout
+INFO: Cron:ClearPromotion Runat 2017-07-07 17:35:54 Use 0.084000 s 
+Cron:AutoRefreshResume Runat 2017-07-07 17:35:54 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-07 17:35:54 Use -0.007000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-07 17:35:54 Use -0.009000 s 
+

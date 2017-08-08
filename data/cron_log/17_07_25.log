@@ -1,0 +1,40 @@
+[ 2017-07-25T10:32:36+08:00 ] 127.0.0.1 /index.php?XDEBUG_SESSION_START=13671
+INFO: Cron:ClearPromotion Runat 2017-07-25 10:32:36 Use 0.398000 s 
+Cron:AutoApplyJobs Runat 2017-07-25 10:32:36 Use 0.000000 s 
+Cron:AutoRefreshResume Runat 2017-07-25 10:32:36 Use -0.058000 s 
+Cron:AutoRefreshJobs Runat 2017-07-25 10:32:36 Use -0.064000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-25 10:32:36 Use -0.066000 s 
+Cron:ClearOrder Runat 2017-07-25 10:32:36 Use -0.108000 s 
+
+[ 2017-07-25T11:01:06+08:00 ] 127.0.0.1 /index.php?m=&c=Personal&a=resume_add
+INFO: Cron:ClearPromotion Runat 2017-07-25 11:01:06 Use 0.015600 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-25 11:01:06 Use 0.000000 s 
+
+[ 2017-07-25T11:10:10+08:00 ] 127.0.0.1 /index.php?m=&c=Personal&a=resume_add
+INFO: Cron:AutoRefreshResume Runat 2017-07-25 11:10:10 Use 0.015600 s 
+Cron:AutoRefreshJobs Runat 2017-07-25 11:10:10 Use 0.000000 s 
+
+[ 2017-07-25T13:42:47+08:00 ] 127.0.0.1 /index.php?m=&c=Personal&a=resume_add
+INFO: Cron:ClearPromotion Runat 2017-07-25 13:42:47 Use 0.095000 s 
+Cron:AutoRefreshResume Runat 2017-07-25 13:42:47 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-25 13:42:47 Use -0.005000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-25 13:42:47 Use -0.006000 s 
+
+[ 2017-07-25T14:07:20+08:00 ] 127.0.0.1 /index.php?m=&c=members&a=logout
+INFO: Cron:ClearPromotion Runat 2017-07-25 14:07:20 Use 0.019000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-25 14:07:20 Use 0.000000 s 
+
+[ 2017-07-25T14:43:16+08:00 ] 127.0.0.1 /
+INFO: Cron:AutoRefreshResume Runat 2017-07-25 14:43:16 Use 0.012000 s 
+Cron:AutoRefreshJobs Runat 2017-07-25 14:43:16 Use 0.000000 s 
+
+[ 2017-07-25T15:57:34+08:00 ] 127.0.0.1 /index.php?m=&c=members&a=user_getpass
+INFO: Cron:ClearPromotion Runat 2017-07-25 15:57:34 Use 0.045000 s 
+Cron:AutoRefreshResume Runat 2017-07-25 15:57:34 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-25 15:57:34 Use -0.005000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-25 15:57:34 Use -0.006000 s 
+
+[ 2017-07-25T16:01:36+08:00 ] 127.0.0.1 /index.php?m=&c=company&a=user_loginlog
+INFO: Cron:ClearPromotion Runat 2017-07-25 16:01:36 Use 0.027000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-25 16:01:36 Use 0.000000 s 
+

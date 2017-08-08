@@ -1,0 +1,12 @@
+[ 2017-07-31T13:58:21+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Jobs&a=index&menuid=194&child=1
+INFO: Cron:ClearPromotion Runat 2017-07-31 13:58:21 Use 0.129000 s 
+Cron:AutoRefreshResume Runat 2017-07-31 13:58:21 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-31 13:58:21 Use -0.035000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-31 13:58:21 Use -0.038000 s 
+
+[ 2017-07-31T14:48:28+08:00 ] 127.0.0.1 /index.php?m=Admin&c=index&a=logout
+INFO: Cron:ClearPromotion Runat 2017-07-31 14:48:28 Use 0.027000 s 
+Cron:AutoRefreshResume Runat 2017-07-31 14:48:28 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-31 14:48:28 Use -0.002000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-31 14:48:28 Use -0.004000 s 
+

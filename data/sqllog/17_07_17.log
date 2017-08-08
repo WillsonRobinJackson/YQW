@@ -1,0 +1,2 @@
+[ 2017-07-17T15:43:17+08:00 ] 127.0.0.1 /index.php?m=admin&c=jobs&a=index
+SQL: select count(*) as tp_count from(( SELECT * FROM `muqinger_jobs`    ) union all ( SELECT * FROM `muqinger_jobs_tmp`    )) as tp_t [RunTime:0.298s] [IP:127.0.0.1] [AddTime:1500277397] [qscms]

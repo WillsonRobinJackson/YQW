@@ -1,0 +1,25 @@
+<meta charset="utf-8">
+<title>{$page_seo.title}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name = "format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<if condition="$apply['Subsite']">
+	<base href="{:C('SUBSITE_DOMAIN')}"/>
+</if>
+<script src="../public/js/rem.js"></script>
+<script src="../public/js/zepto.min.js"></script>
+<script>
+	var qscms = {
+		base : "{:C('SUBSITE_DOMAIN')}",
+		domain : "http://{$_SERVER['HTTP_HOST']}",
+		root : "__ROOT__/index.php",
+		companyRepeat:"{:C('qscms_company_repeat')}",
+		is_subsite : <if condition="$apply['Subsite'] and C('SUBSITE_VAL.s_id') gt 0">1<else/>0</if>,
+		subsite_level : "{:C('SUBSITE_VAL.s_level')}"
+	};
+	if (!!window.ActiveXObject || "ActiveXObject" in window) {
+		window.location.href = '{:U('Index/compatibility')}';
+	}
+</script>
+<link rel="stylesheet" href="../public/css/common.css">

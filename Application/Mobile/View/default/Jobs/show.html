@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<include file="public:meta"/>
+	<qscms:jobs_show 列表名="jobs_info" 职位id="$_GET['id']"/>
+	<link rel="stylesheet" href="../public/css/jobs.css">
+
+
+	<script src="../public/layer/jquery-1.11.3.js" type="text/javascript"></script>
+	<script src="../public/layer/layer.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="../public/zpH5/style/reset.css" />
+	<link rel="stylesheet" href="../public/zpH5/style/center.css" />
+	<link rel="stylesheet" href="../public/zpH5/style/mui.poppicker.css" />
+	<link rel="stylesheet" href="../public/zpH5/style/mui.picker.css" />
+	<link rel="stylesheet" href="../public/zpH5/style/mui.dtpicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="../public/css/assem.css">
+	<script src="../public/js/hm.js"></script>
+	<link rel="stylesheet" type="text/css" href="../public/assem(1).css">
+	<script src="../public/js/aplyjob.min.js"></script>
+
+	<script src="../public/zpH5/js/mui.min.js"></script>
+	<script src="../public/zpH5/js/mui.picker.js"></script>
+	<script src="../public/zpH5/js/mui.picker.all.js"></script>
+	<script src="../public/zpH5/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../public/zpH5/js/date.data-3.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+		.btn-boxs{
+			width: 100%;
+			overflow: hidden;
+			margin-top: 30px;
+		}
+		.btn-boxs li{
+			width: 42%;
+			float: left;
+			text-align: center;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			margin: 0 4% 4% 4%;
+			box-sizing:border-box;
+			-moz-box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+			padding: 8px 0;
+
+		}
+		.modal-overlay
+		{
+			position: fixed;/*absolute;*/
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.4);
+			z-index: 10000;
+			visibility: hidden;
+			opacity: 0;
+			-webkit-transition-duration: 400ms;
+			-moz-transition-duration: 400ms;
+			-ms-transition-duration: 400ms;
+			-o-transition-duration: 400ms;
+			transition-duration: 400ms;
+		}
+		.modal.modal-in {
+			display: block;
+			opacity: 1;
+			-webkit-transition-duration: 400ms;
+			-moz-transition-duration: 400ms;
+			-ms-transition-duration: 400ms;
+			-o-transition-duration: 400ms;
+			transition-duration: 400ms;
+			-webkit-transform: translate3d(0%, 0%, 0) scale(1);
+			-moz-transform: translate3d(0%, 0%, 0) scale(1);
+			-ms-transform: translate3d(0%, 0%, 0) scale(1);
+			-o-transform: translate3d(0%, 0%, 0) scale(1);
+			transform: translate3d(0%, 0%, 0) scale(1);
+		}
+		.modal {
+			display: none;
+			width: 270px;
+			position: fixed;
+			z-index: 11000;
+			left: 50%;
+			margin-left: -135px;
+			margin-top: 0;
+			top: 50%;
+			text-align: center;
+			border-radius: 7px;
+			opacity: 0;
+			-webkit-transform: translate3d(0%, 0%, 0) scale(1.185);
+			-moz-transform: translate3d(0%, 0%, 0) scale(1.185);
+			-ms-transform: translate3d(0%, 0%, 0) scale(1.185);
+			-o-transform: translate3d(0%, 0%, 0) scale(1.185);
+			transform: translate3d(0%, 0%, 0) scale(1.185);
+			-webkit-transition-property: -webkit-transform, opacity;
+			-moz-transition-property: -moz-transform, opacity;
+			-ms-transition-property: -ms-transform, opacity;
+			-o-transition-property: -o-transform, opacity;
+			transition-property: transform, opacity;
+		}
+		.modal-inner {
+			padding: 15px;
+			border-bottom: 1px solid #b5b5b5;
+			border-radius: 7px 7px 0 0;
+			background: #e8e8e8;
+		}
+		.modal-title {
+			font-weight: 500;
+			line-height: 36px;
+			font-size: 18px;
+			text-align: center;
+		}
+		.modal-buttons {
+			height: 44px;
+			overflow: hidden;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-justify-content: center;
+			-moz-justify-content: center;
+			-ms-justify-content: center;
+			justify-content: center;
+			border-radius: 0 0 7px 7px;
+		}
+		.modal-button {
+			width: 100%;
+			padding: 0 5px;
+			height: 44px;
+			font-size: 17px;
+			line-height: 44px;
+			text-align: center;
+			color: #007aff;
+			background: #e8e8e8;
+			display: block;
+			position: relative;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			cursor: pointer;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			border-right: 1px solid #b5b5b5;
+		}
+		.modal-button:last-child {
+			border-right: none;
+			border-radius: 0px 0px 7px 0px;
+		}
+	</style>
+</head>
+<body>
+<include file="public:header_per"/>
+<!-- 按钮div -->
+<div class="modal-overlay"></div>
+<div class="modal" style="margin-top: -99px;">
+	<div class="modal-inner">
+		<div class="modal-title" style=" font-size: 0.3rem;">您确定要申请该职位吗?</div>
+	</div>
+	<div class="modal-buttons" >
+		<span class="modal-button modal-button1" style=" color: #666666; font-size: 0.3rem;">取消</span>
+		<span class="modal-button modal-button-bold modal-button-bold1" style=" font-size: 0.3rem; color: #ff6600;">确定</span>
+	</div>
+</div>
+<div class="jobsshowtop">
+	<div class="jobsname font18" style=" font-size: 0.34rem;">{$jobs_info.jobs_name}
+		<if condition="$jobs_info['emergency'] eq 1">
+			<img src="../public/images/231.png"/>
+		</if>
+	</div>
+	<div class="wage font18" style=" font-size: 0.32rem;">{$jobs_info.wage_cn}</div>
+	<div class="city font14" style=" font-size: 0.28rem;">{$jobs_info.district_cn}&nbsp;|&nbsp;{$jobs_info.education_cn}&nbsp;|&nbsp;{$jobs_info.experience_cn}</div>
+	<!--<div class="time font12">{$jobs_info['refreshtime_cn']}</div>-->
+	<div class="f14 col6 mt8" style=" background-color: white; padding-top: 0.2rem; font-size: 0.25rem; ">
+		该职位已有<i class="num colf04" style="color: red; font-style: normal;">12</i>人申请
+	</div>
+</div>
+
+
+<!--
+<div class="jobsshowatt">
+	<div class="attul">
+		<div class="attli t1">性别{$jobs_info.sex_cn}</div>
+		<div class="attli t2"><if condition="$jobs_info.education eq 0">学历不限<else />{$jobs_info.education_cn}</if></div>
+		<div class="attli t3"><if condition="$jobs_info.experience eq 0">经验不限<else />{$jobs_info.experience_cn}</if></div>
+		<div class="attli t4">{$jobs_info.nature_cn}</div>
+		<div class="attli t5"><if condition="$jobs_info.age_cn eq '不限'">年龄不限<else />{$jobs_info.age_cn}</if></div>
+		<div class="attli t6"><if condition="$jobs_info['department']">{$jobs_info.department}<else />部门不限</if></div>
+		<div class="attli t7" style=" width:50%;"><if condition="$jobs_info['mstime']">面试时间 {$jobs_info.mstime_cn}<else />面试时间不限</if></div>
+		<div class="clear"></div>
+	</div>
+</div>
+-->
+
+<if condition="$jobs_info['tag_cn']">
+	<div class="split-block"></div>
+	<div class="jobsshowtag font13"style="  margin-top: -0.4rem;">
+		<div class="tagul" >
+			<volist name="jobs_info['tag_cn']" id="tag">
+				<div class="tagli substring" style="padding-left: 0.15rem; padding-right: 0.15rem; height: 0.45rem; line-height: 0.45rem;">{$tag}</div>
+			</volist>
+			<div class="clear"></div>
+		</div>
+	</div>
+</if>
+<div class="split-block"></div>
+
+<div style="font-size: 0.25rem;">
+<div class="jobsshowsdes" style=" margin-top: -0.1rem; padding-left: 0.3rem;">
+	<div class=" list_height">面试时间：<span style=" color: #ff6600;">{$jobs_info.mstime_cn}</span></div>
+</div>
+<div class="jobsshowsdes" style=" margin-top: -0.3rem; padding-left: 0.3rem; padding-bottom: 0.1rem;">
+	<div class=" list_height">面试地址：<span style=" color: #ff6600;">{$jobs_info.district_cn}</span></div>
+</div>
+<div class="jobsshowadder link_gray6" style=" margin-top: -0.4rem; margin-bottom: 0.15rem; border: none;">
+	<div class="adder">
+		<if condition="$jobs_info['map_x'] gt 0 && $jobs_info['map_y'] gt 0">
+			<a class="show-map" href="#map">工作地址：{$jobs_info.company.address}</a>
+			<!--<img src="../public/images/123.png">-->
+			<else />
+			地址：{$jobs_info.company.address}
+		</if>
+	</div>
+</div>
+</div>
+
+<div class="jobsshowcom" onclick="javascript:location.href='{$jobs_info.company_url}'">
+	<div class="leftpic">
+		<div class="imgbox"><img src="../public/images/no_logo.png"></div>
+	</div>
+	<div class="comtxt"style="margin-top: 0.2rem;">
+		<div class="cname font15 substring">{$jobs_info.company.companyname}
+			<if condition="$jobs_info['company']['audit'] eq 1"><img src="../public/images/120.png" title="认证企业"></if>
+			<if condition="$jobs_info['company']['setmeal_id'] gt 1"><img src="../public/images/121.png" title="{$info.setmeal_name}"></if>
+			<if condition="$jobs_info['company']['famous'] eq 1"><img src="../public/images/122.png" title="诚聘通企业"></if>
+		</div>
+		<div class="city font12">{$jobs_info.company.scale_cn}  | {$jobs_info.company.nature_cn}</div>
+		<!--<div class="trade font12">{$jobs_info.company.trade_cn}</div>-->
+	</div>
+	<div class="clear"></div>
+
+</div>
+
+
+
+
+
+<div class="split-block"></div>
+
+<!--<div class="jobsshowst">-->
+	<!--<div class="eattitle list_height">-->
+		<!--职位统计-->
+		<!--<div class="ritle font12">企业最近登录: {$jobs_info.company.last_login_time}</div>-->
+	<!--</div>-->
+
+	<!--<div class="stli"><span>{$jobs_info.company.reply_ratio}%</span><br>简历处理率</div>-->
+	<!--<div class="stli"><span>{$jobs_info.company.reply_time}</span><br>简历平均处理时长</div>-->
+	<!--<div class="clear"></div>-->
+<!--</div>-->
+
+<div class="split-block"></div>
+<div class="jobsshowsdes" style=" margin-top: -0.35rem; margin-left: -0.25rem;">
+	<div class="eattitle list_height" style=" background: url(../public/images/5.png) no-repeat 0.45rem 0.35rem; background-size: 1.3%; font-size: 0.305rem;">每月能拿多少钱</div>
+	<div class="txt" style="  margin-left: 0.15rem; font-size: 0.25rem;">{$jobs_info.mydsq}</div>
+</div>
+<div class="jobsshowsbsj jobsshowsdes" style=" margin-top: -0.25rem; margin-left: -0.25rem;">
+	<div class="eattitle list_height" style=" background: url(../public/images/5.png) no-repeat 0.45rem 0.35rem; background-size: 1.3%; font-size: 0.305rem;">上班时间</div>
+	<div class="tagul " style="   padding-top: 0.2rem; padding-left: 0.2rem;  font-size: 0.25rem;">
+		{$jobs_info.sbsj|strtotags}
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="jobsshowsdes" style=" margin-top: -0.25rem; margin-left: -0.25rem;">
+	<div class="eattitle list_height" style=" background: url(../public/images/5.png) no-repeat 0.45rem 0.35rem; background-size: 1.3%; font-size: 0.305rem;">工作职责</div>
+	<div class="txt" style="  margin-left: 0.15rem; font-size: 0.25rem;">{$jobs_info.gzzz}</div>
+</div>
+<div class="jobsshowsdes" style=" margin-top: -0.25rem; margin-left: -0.25rem;">
+	<div class="eattitle list_height" style=" background: url(../public/images/5.png) no-repeat 0.45rem 0.35rem; background-size: 1.3%; font-size: 0.305rem;">工作要求</div>
+	<div class="txt" style="  margin-left: 0.15rem; font-size: 0.25rem;">{$jobs_info.gzyq}</div>
+</div>
+<div class="jobsshowsdes"  style=" margin-top: -0.25rem; margin-left: -0.25rem;">
+	<div class="eattitle list_height" style=" background: url(../public/images/5.png) no-repeat 0.45rem 0.35rem; background-size: 1.3%; font-size: 0.305rem;">晋升空间</div>
+	<div class="txt" style="  margin-left: 0.15rem; font-size: 0.25rem;">{$jobs_info.jskj}</div>
+</div>
+
+
+<div class="jobsshowsdes" style=" margin-top: -0.25rem; margin-left: -0.25rem;">
+	<div class="eattitle list_height" style=" background: url(../public/images/5.png) no-repeat 0.45rem 0.35rem; background-size: 1.3%; font-size: 0.305rem;">职位描述</div>
+	<div class="txt" style=" margin-left: 0.15rem; font-size: 0.25rem;">{$jobs_info.contents}</div>
+</div>
+<div class="split-block"></div>
+
+<div class="scd-div borb" style=" background: url(../public/images/5.png) no-repeat 0.2rem 0.35rem; background-size: 1.3%; background-color: white;">
+	<h3 style="font-size: 0.305rem; font-weight: bold; color: #666666;">职位秀</h3>
+	<div class="scd-d-conts pr" onclick="statistics(&#39;jdShow&#39;)">
+		<!--
+        <img src="http://p.xiangcaozhaopin.com/8438127407989.png@690w_390h_2e"/>
+        -->
+		<div class="scd-showp-img" style="background-image: url(http://p.xiangcaozhaopin.com/8438127407989.png);"></div>
+		<div class="ci-imgnum">共4张</div>
+	</div>
+</div>
+<div class="scd-div borb" style="background: url(../public/images/5.png) no-repeat 0.2rem 0.35rem; background-size: 1.3%; background-color: white;">
+	<h3 style="font-size: 0.305rem; font-weight: bold; color: #666666;">温馨提示</h3>
+	<div class="scd-d-conts scd-d-cnotice">
+		<p id="commentsP" class="twoover">公交及地铁路线：32.78.229路公交到成飞大道站下车，地铁4号线中坝站下车坐33,232到红碾村下车<br>公司下午3点开始宣讲，所以请参加面试的小伙伴都提前查好路线，提前出门<br></p><div id="commentsUp" class="scd-d-upmore"><i></i><span>查看全部</span></div><div id="commentsDn" class="scd-d-hide dn"><i></i><span>收起</span></div>
+	</div>
+</div>
+</div>
+</div>
+
+<!--举报-->
+<div class="spedet-report mt8" onclick="toComplain();">
+	<div class="spedet-text">
+		<h3>如遇收费、虚假、诈骗、违法等行为请立即举报！</h3>
+		<p>面试过程中请勿缴纳任何费用，谨防受骗！</p>
+	</div>
+	<span class="report-ico" style="background: url(../public/zpH5/images/225.png) 0.18rem -0.01rem no-repeat; background-size: 70%;"><i class="borl-dc"></i>举报</span>
+</div>
+
+<!--职位推荐-->
+<div class="specialbox rec-wrap bortb">
+	<div class="rec-text"><i style=" background: url(../public/images/xc263_rec1.png) no-repeat; background-size:90%;"></i>看过该职位的人还看过</div>
+	<ul class="scb-ul-sty">
+		<li class="bort-ebe">
+			<a onclick="_hmt.push([&#39;_trackEvent&#39;, &#39;详情页&#39;, &#39;click&#39;, &#39;详情_推荐职位&#39;, 1])" href="http://www.xiangcaozhaopin.com/mob/job/FIwWCouNu37o0xoQ" class="scb-a">
+				<div class="scb-d-weal">
+					<div class="spe-scb-top">
+						<div class="com-logo" style="background-image:url(http://p.xiangcaozhaopin.com/9608599141811.png@120w_120h);"></div>
+						<div class="com-cont">
+							<div class="spe-title lh1">
+								<strong class="oneover">知名打车神器-网络在线客服</strong>
+							</div>
+							<div class="scb-cominf mt6 lh1">
+								<div class="scb-cominfl">
+									<p class="mt3 col6 oneover">世纪天语</p>
+									<p class="f12 col9 mt8 oneover">
+										青羊
+										<i class="sline"></i>
+										高中
+										<i class="sline"></i>
+										不限
+									</p>
+								</div>
+								<div class="scb-cominfr">
+									<p class="f17 colf04 text-r"><i class="f12 colf04">￥</i>3000-5000</p>
+									<p class="f12 colff8 mt7 text-r">
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+
+		<li class="bort-ebe">
+			<a onclick="_hmt.push([&#39;_trackEvent&#39;, &#39;详情页&#39;, &#39;click&#39;, &#39;详情_推荐职位&#39;, 1])" href="http://www.xiangcaozhaopin.com/mob/job/KG_cL4uNu36FEh4U" class="scb-a">
+				<div class="scb-d-weal">
+					<div class="spe-scb-top">
+						<div class="com-logo" style="background-image:url(http://p.xiangcaozhaopin.com/17488956099183.png@120w_120h);"></div>
+						<div class="com-cont">
+							<div class="spe-title lh1">
+								<strong class="oneover"> ofo小黄车--新团队开招了</strong>
+								<div class="hour24"></div>
+							</div>
+							<div class="scb-cominf mt6 lh1">
+								<div class="scb-cominfl">
+									<p class="mt3 col6 oneover">ofo共享单车</p>
+									<p class="f12 col9 mt8 oneover">
+										锦江
+										<i class="sline"></i>
+										中专
+										<i class="sline"></i>
+										不限
+									</p>
+								</div>
+								<div class="scb-cominfr">
+									<p class="f17 colf04 text-r"><i class="f12 colf04">￥</i>3000-5000</p>
+									<p class="f12 colff8 mt7 text-r">
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li class="bort-ebe">
+			<a onclick="_hmt.push([&#39;_trackEvent&#39;, &#39;详情页&#39;, &#39;click&#39;, &#39;详情_推荐职位&#39;, 1])" href="http://www.xiangcaozhaopin.com/mob/job/DKUc9ouNu359uS4M" class="scb-a">
+				<div class="scb-d-weal">
+					<div class="spe-scb-top">
+						<div class="com-logo" style="background-image:url(http://p.xiangcaozhaopin.com/10087024949567.png@120w_120h);"></div>
+						<div class="com-cont">
+							<div class="spe-title lh1">
+								<strong class="oneover">摩拜多岗位【车辆运营/维护】多地分配</strong>
+								<div class="hour24"></div>
+							</div>
+							<div class="scb-cominf mt6 lh1">
+								<div class="scb-cominfl">
+									<p class="mt3 col6 oneover">摩拜科技有限公司</p>
+									<p class="f12 col9 mt8 oneover">
+										高新区
+										<i class="sline"></i>
+										大专
+										<i class="sline"></i>
+										不限
+									</p>
+								</div>
+								<div class="scb-cominfr">
+									<p class="f17 colf04 text-r"><i class="f12 colf04">￥</i>3200-4400</p>
+									<p class="f12 colff8 mt7 text-r">
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<qscms:jobs_list 列表名="jobslist" 显示数目="6" 职位分类="$jobs_info['jobcategory']" 去除id="$jobs_info['id']"/>
+<notempty name="jobslist['list']">
+	<div class="split-block"></div>
+	<div class="jobsshowrec">
+		<div class="eattitle list_height">
+			推荐职位
+			<div class="ritle font12 link_gray9"><a href="{:U('Jobs/index')}">查看更多></a></div>
+		</div>
+		<volist name="jobslist['list']" id="jobs">
+			<div class="jobslist">
+				<div class="jname font15 link_gray6 substring"><a href="{$jobs.jobs_url}">{$jobs.jobs_name}</a></div>
+				<div class="cname font12 substring">{$jobs.companyname} | {$jobs.district_cn}</div>
+				<div class="wage font13">{$jobs.wage_cn}</div>
+				<div class="time font12">{$jobs.refreshtime_cn}</div>
+			</div>
+		</volist>
+	</div>
+	<div class="jobssshowbottomso link_blue">没有找到满意的职位? <a href="{:U('Jobs/index')}">立即搜索</a></div>
+</notempty>
+
+
+<div class="split-block-footnav"></div>
+<!-- <neq name="jobs_info['tmp']" value="1">
+<div class="jobsfootnav">
+		<div class="btns link_gray6">
+		  <div class="qs-btn qs-btn-medium qs-btn-blue qs-btn-inline apply_jobs">投递简历</div>
+      <if condition="$jobs_info['contact']['telephone_show'] eq 0">
+      <a href="javascript:;" class="J_tel tel font9 hide_tel"><img src="../public/images/130.png"><br>
+拨打电话</a>
+      <else />
+		  <a href="tel:<if condition='$jobs_info["contact"]["telephone_"]'>{$jobs_info["contact"]["telephone_"]}<else />{$jobs_info["contact"]["landline_tel"]}</if>" class="J_tel tel font9"><img src="../public/images/130.png"><br>
+拨打电话</a>
+      </if>
+      <div class="fov font9 favor">
+      <if condition="$jobs_info['favor']">
+		    <img src="../public/images/175.png"><br>已收藏
+      <else />
+        <img src="../public/images/131.png"><br>收藏职位
+      </if>
+      </div>
+  </div>
+</div>
+</neq> -->
+
+<div class="footer-fixed" style="z-index:10000">
+	<!-- <div class="share"><a class="text-c" href="javascript:void(0);"><i class="scd-share"></i>分享</a>
+	</div> -->
+	<div class="fov font9 favor share">
+		<if condition="$jobs_info['favor']">
+			<img src="../public/images/175.png" style="width:32px;height:32px;margin-top:7px;"><br>已收藏
+			<else />
+			<img src="../public/images/131.png" style="width:32px;height:32px;margin-top:7px;"><br>收藏职位
+		</if>
+	</div>
+	<div class="scd-reserve">
+		<div class="foot-apply-interv">
+			<input name="jobid" value="{$jobs_info.id}" type="hidden">
+			<button type="button" class="interv-but responsive mobile_reg" style="line-height:30px;"><i></i>申请面试</button>
+		</div>
+	</div>
+</div>
+<script id="tpl-map" type="text/html">
+	<!--地图-->
+	<div class="headernavfixed">
+		<div class="headernav font18"><div class="title">企业位置<div class="return js-back"></div></div></div>
+	</div>
+	<div class="com-map">
+		<div class="map" id="container"></div>
+	</div>
+	<div class="split-block"></div>
+	<div class="btn-spacing">
+		<div id="mapBtn" class="qs-btn qs-btn-blue font18" title="返回">返回</div>
+	</div>
+</script>
+
+<include file="public:footer_min" />
+<script src="../public/js/popWin.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={:C('qscms_map_ak')}"></script>
+<script type="text/javascript">
+	$.getJSON("{:U('AjaxCommon/jobs_click')}",{id:"{$jobs_info.id}"});
+	var mapTemp = $('#tpl-map').html();
+	$(".show-map").on('click', function() {
+		var $this = $(this);
+		popWin.init({
+			from:"right",
+			html:mapTemp,
+			handle:function(a){
+				var map = new BMap.Map("container");
+				var point = new BMap.Point("{$jobs_info['map_x']}","{$jobs_info['map_y']}");  // 创建点坐标
+				map.centerAndZoom(point, "{$jobs_info['map_zoom']}");
+				var qs_marker = new BMap.Marker(point);        // 创建标注
+				map.addOverlay(qs_marker);
+				map.setCenter(point);
+				map.addControl(new BMap.NavigationControl());//添加鱼骨
+				map.enableScrollWheelZoom();//启用滚轮放大缩小，默认禁用。
+				$('#mapBtn').on('click',function(){
+					a.close();
+				});
+			}
+		})
+	});
+	var isVisitor = "{:C('visitor.uid')}";
+	var utype = "{:C('visitor.utype')}";
+	// 收藏职位点击事件绑定
+	$(".favor").on('click',function(){
+		var obj = $(this);
+		var url = "{:U('ajaxPersonal/jobs_favorites')}";
+		var jid = "{$jobs_info['id']}";
+		if ((isVisitor > 0)) {
+			if(utype != 2){
+				qsToast({type:2,context: '请登录个人会员'});
+				return false;
+			}
+			$.getJSON(url,{jid:jid},function(result){
+				if(result.status==1){
+					qsToast({type:1,context: result.msg});
+					if(result.data=='cancel'){
+						obj.html('<img src="../public/images/131.png"><br>收藏职位');
+					}else{
+						obj.html('<img src="../public/images/175.png"><br>已收藏');
+					}
+				} else {
+					qsToast({type:2,context: result.msg});
+					return false;
+				}
+			});
+		} else {
+			window.location.href="{:U('members/login')}";
+			return false;
+		}
+	});
+	// 申请职位点击事件绑定
+	$(".apply_jobs").on('click',function(){
+		var url = "{:U('ajaxPersonal/resume_apply')}";
+		var jid = "{$jobs_info['id']}";
+		if ((isVisitor > 0)) {
+			if(utype != 2){
+				qsToast({type:2,context: '请登录个人会员'});
+				return false;
+			}
+			$.getJSON(url,{jid:jid},function(result){
+				if(result.status==1){
+					qsToast({type:1,context: result.msg});
+				} else {
+					qsToast({type:2,context: result.msg});
+					return false;
+				}
+			});
+		} else {
+			if (eval(qscms.smsTatus)) {
+				window.location.href=qscms.root+'?m=Mobile&c=AjaxPersonal&a=resume_add_dig&jid='+jid;
+			} else {
+				window.location.href="{:url_rewrite('QS_login')}";
+			}
+		}
+	});
+	$('.J_tel').on('click',function(){
+		if (isVisitor > 0) {
+			if(utype != 2){
+				qsToast({type:2,context: '请登录个人会员'});
+				return false;
+			}
+			if($(this.hasClass('hide_tel'))){
+				qsToast({type:2,context: '该企业设置联系方式不公开！'});
+				return false;
+			}
+		}else{
+			window.location.href="{:U('members/login')}";
+			return false;
+		}
+	});
+</script>
+<script>
+	// 性别
+	(function($, doc) {
+		$.init();
+		$.ready(function() {
+			//性别
+			var userPicker = new $.PopPicker();
+			userPicker.setData([
+				{
+					text: "男"
+				}, {
+
+					text: "女"
+				}]);
+			var showUserPickerButton = doc.getElementById("showUserPicker");
+			var userResult = doc.getElementById("userResult");
+			showUserPickerButton.addEventListener("tap", function(event) {
+				userPicker.show(function(items) {
+					userResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//学历
+			var userPicker1 = new $.PopPicker();
+			userPicker1.setData([
+
+				{
+					text: "高中"
+				},
+				{
+					text: "中专"
+				},
+				{
+					text: "大专"
+				},
+				{
+					text: "本科"
+				},
+				{
+					text: "硕士"
+				},
+				{
+					text: "博士"
+				}]);
+			var showXuliPickerButton = doc.getElementById("showXuliPicker");
+			var xuliResult = doc.getElementById("xuliResult");
+			showXuliPickerButton.addEventListener("tap", function(event) {
+				userPicker1.show(function(items) {
+					xuliResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+
+			//工作经验
+			var userPicker2 = new $.PopPicker();
+			userPicker2.setData([
+
+				{
+					text: "无经验"
+				},
+				{
+					text: "一年以下"
+				},
+				{
+					text: "1-2年"
+				},
+				{
+					text: "2-3年"
+				},
+				{
+					text: "3-5年"
+				},
+				{
+					text: "5年以上"
+				}]);
+			var showyearPickerButton = doc.getElementById("showyearPicker");
+			var yearResult = doc.getElementById("yearResult");
+			showyearPickerButton.addEventListener("tap", function(event) {
+				userPicker2.show(function(items) {
+					yearResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//三轴联动
+			var cityPicker3 = new $.PopPicker({
+				layer: 3
+			});
+			cityPicker3.setData(cityData3);
+			var showCityPickerButton = doc.getElementById("showCityPicker3");
+			var cityResult3 = doc.getElementById("cityResult3");
+			showCityPickerButton.addEventListener("tap", function(event) {
+				cityPicker3.show(function(items) {
+					cityResult3.innerText =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//日期
+
+			var dtpicker = new mui.DtPicker({
+				type: "date",//设置日历初始视图模式
+				beginDate: new Date(1949, 10, 01),//设置开始日期
+				endDate: new Date(2088, 12, 25),//设置结束日期
+				labels: ["年", "月", "日", "时", "分"],//设置默认标签区域提示语
+				customData: {
+					h: [{
+						value: "AM",
+						text: "AM"
+					}, {
+						value: "PM",
+						text: "PM"
+					}]
+				}//时间/日期别名
+			})
+
+			var showDatePickerButton = doc.getElementById("showDatePicker3");
+			var dateResult3 = doc.getElementById("dateResult3");
+			showDatePickerButton.addEventListener("tap", function(event) {
+				dtpicker.show(function(items) {
+					dateResult3.innerText =  items.y.text + "-" + items.m.text + "-" + items.d.text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+		});
+	})
+	(mui, document);
+
+</script>
+<script>
+	$(function() {
+		//申请提交
+		$('.responsive').on("click",function(){
+			$(".modal-overlay").css({"visibility":"visible","opacity":"1"});
+			$(".modal").addClass("modal-in");
+		});
+
+		$(".modal-button1").on("click",function(){
+			$(".modal-overlay").css({"visibility":"hidden","opacity":"0"});
+			$(".modal").removeClass("modal-in");
+		});
+
+
+		$('.modal-button-bold1').on('click', function() {
+			$(".modal-overlay").css({"visibility":"hidden","opacity":"0"});
+			$(".modal").removeClass("modal-in");
+
+			var name = $("input[name=name]").val();
+			var sex  = $("#userResult").html();
+			var age  = $("#dateResult3").html();
+			var address = $("#cityResult3").html();
+			var education = $("#xuliResult").html();
+			var year  = $("#yearResult").html();
+			var phone = $("input[name=phone]").val();
+			var code  = $("input[name=code]").val();
+			var jobid = $("input[name=jobid]").val();
+
+			$.post("{:U('jobs/ajaxshow')}",{name:name,sex:sex,age:age,address:address,education:education,year:year,phone:phone,code:code,jobid:jobid},function(data){
+				if($.trim(data)=="1")
+				{
+					layer.msg('信息不完整', {icon: 2});
+				}
+				else if($.trim(data)=="2")
+				{
+					layer.msg('系统繁忙', {icon: 2});
+				}
+				else if($.trim(data)=="3")
+				{
+					layer.msg('姓名长度为2-5个字符', {icon: 2});
+				}
+				else if($.trim(data)=="4")
+				{
+					layer.msg('验证码错误', {icon: 2});
+				}
+				else if($.trim(data)=="5")
+				{
+					layer.msg('验证码过期', {icon: 2});
+				}
+				else if ($.trim(data)=="6")
+				{
+					layer.msg('申请成功，等待审核', {icon: 1});
+					setTimeout(function () {
+						window.location.href="{:U('jobs/applylogin')}";
+						//window.location.reload();
+					}, 2000);
+				} else {
+					layer.msg('系统繁忙', {icon: 2});
+					setTimeout(function () {
+						window.location.reload();
+					}, 2000);
+				}
+			})
+		});
+
+
+		//发送验证码
+		$('#codeBtn').on('click', function() {
+			$.post("{:U('jobs/ajax_send_code')}", {phone:$("input[name=phone]").val()}, function(data) {
+				if ($.trim(data) == 1) {
+					layer.msg('手机号为空或格式错误！', {icon: 2});
+				} else if ($.trim(data) == 2) {
+					layer.msg('请60秒后再进行验证！', {icon: 2});
+				} else {
+					showTime(60);
+					$('.mobile_reg').removeAttr("disabled");
+				}
+			});
+		});
+
+	});
+
+
+
+	function showTime(time){
+		$('#codeBtn').prop('disabled', true);
+
+		for (var i = 0; i <= time; i++) {
+			window.setTimeout("updateP("+ i +","+time+")", i*1000);
+		};
+	};
+	function updateP(num, time) {
+		if(num == time) {
+			$('#codeBtn').html('重新发送').prop('disabled', false);
+		}else{
+			var printnr = time - num;
+			$('#codeBtn').html(printnr +"秒重新发送");
+		}
+	}
+
+
+</script>
+<script src="../public/js/assem(2).js"></script><div class="slide-view" id="slideView" display="block"></div>
+<script>
+
+    var restPath = '/mob';
+    if(isWeiXin()) {
+        var hideMenu = false;
+        var onWeChatAPIReady = function (config) {
+            wx.config(config);
+        }
+    }
+    function replacePush(){
+        var url = window.location.href;
+        url = url.replace('?afterLogin=jobapply', '');
+        push(url);
+    }
+</script>
+
+<script>
+    var restPath = '/mob';
+    function GetUrlRelativePath()
+    {
+        var url = document.location.toString();
+        var arrUrl = url.split("//");
+        var urlParams = arrUrl[1].split("/");
+        var fullPath = arrUrl[0] + '//';
+        if(urlParams){
+            for(var i = 0; i < urlParams.length; i++){
+                if(i == 0){
+                    fullPath += urlParams[i];
+                } else if(i == 1){
+                    fullPath += '/' + urlParams[i];
+                }
+            }
+        }
+        return fullPath;
+    }
+    var shareUrl = GetUrlRelativePath()+"/jd/2724126";
+</script>
+<script>
+    var comLogo = 'http://p.xiangcaozhaopin.com/9608599141811.png';
+    var shareTitle = '【香草招聘】世纪天语正在招聘知名打车神器-网络在线客服，哎呦~不错哦！';
+    var shareContents = '小伙伴们都在香草招聘找到了好工作，你~还等什么？';
+
+    shareTitle = '';
+    shareContents = '';
+
+    if(!comLogo)
+        comLogo = 'https://mmbiz.qlogo.cn/mmbiz/kiaBzdTTicQeumzH9licEP6Rpsq7m0dOIBsHS3DbHSRhJsCI901wzlazRj91SZpsj4TyNN1fia7bz6YrfF1zhbQorA/0?wx_fmt=jpeg';
+    $(".scd-share-js").bind("click", function(){
+        var config = {
+            url: shareUrl,// 分享的网页链接
+            //title:'猴美的好工作在召唤你【点我来面试】',// 标题
+            title:shareTitle,// 标题
+            desc:shareContents,// 描述
+            img:comLogo,
+            from:'香草招聘' // 来源
+        };
+        var share_obj = new nativeShare('nativeShare',config);
+    });
+    $('.share-hid-js').bind('tap',function(){
+        $(this).hide();
+        $(this).siblings('.share-mask').hide();
+    });
+</script>
+<div class="sharetimeline-mask" style="display: none;"></div>
+<div class="sharetimeline-hidbox" id="rewardFlow" style="display: none;">
+	<div class="sharetimeline-tip">
+		<div class="left">第1步: 点击右上角按钮</div>
+		<div class="right"><img src="../public/images/111.png"></div>
+	</div>
+	<div class="sharetimeline-tip">
+		<div class="left">
+			<span class="font16">第2步: 点击分享到朋友圈&nbsp;&nbsp;</span><br>
+			<span class="font14">
+                必须是"朋友圈"才有红包哦!<br>
+                同一职位仅限首次分享可获得奖励。
+            </span>
+		</div>
+		<div class="right"><img src="../public/images/112.png"></div>
+	</div>
+	<div class="sharetimeline-tip">
+		<img style="width:114px;height:61.5px;" src="../public/images/113.png"><br>
+	</div>
+	<div class="sharetimeline-tip">
+		<img style="width:211px;height:19px;text-align: left;" src="../public/images/114.png">
+	</div>
+	<span class="arrow-guide"></span>
+</div>
+<div class="wllhb" id="others" style="display:none">
+	<img src="../public/images/152.png" class="nopen-hb">
+	<p class="colc59 f14 lh1 mt15 text-c">恭喜您获得一个红包！快登录拆开吧~</p>
+	<button type="button" id="conShare" class="lh-but mt15">继续分享</button>
+</div>
+<div class="wllhb" id="rewardFlow10" style="display:none">
+	<!--10M流量-->
+	<img src="../public/images/155.png" class="open-hb">
+	<p class="f15 col6 mt12 lh24">10M流量将于24小时内为您充入到手机账户<span class="coleb3 f15"></span>中，请留意短信提醒。</p>
+	<button type="button" id="conShare10" class="lh-but mt15">继续分享</button>
+</div>
+<div class="wllhb" id="rewardFlow20" style="display:none">
+	<!--20M流量-->
+	<img src="../public/images/156.png" class="open-hb">
+	<p class="f15 col6 mt12 lh24">20M流量将于24小时内为您充入到手机账户<span class="coleb3 f15"></span>中，请留意短信提醒。</p>
+	<button type="button" id="conShare20" class="lh-but mt15">继续分享</button>
+</div>
+<div class="wllhb" id="rewardFlowZero" style="display:none">
+	<img src="../public/images/154.png" class="nhb-img">
+	<p class="f19 col6 mt17 lh1 text-c">手慢了,红包派完了</p>
+	<button type="button" id="conShareno" class="lh-but mt15">不甘心，继续分享</button>
+</div>
+<!-- 微信现金分享得红包提示开始-->
+<!-- 红包已领取-->
+<div class="wxReward" id="wxAlreadyGet" style="display: none">
+	<div class="mask opac8"></div>
+	<div class="hb-bomb ptc140">
+		<div class="ht-taken-sty"></div>
+		<div class="button-style mt82">
+			<button type="button" class="hb-share-but br5 fwb">
+				<i class="hhm-hb-ico mr12 mt-3"></i>继续分享领红包
+			</button>
+		</div>
+	</div>
+</div>
+<!-- 关注态获取红包后提醒-->
+<div class="wxReward" id="wxSubscribe" style="display: none">
+	<div class="mask opac8"></div>
+	<div class="hb-bomb">
+		<div class="ht-xx-sty2">
+			<img src="../public/images/163.png" class="hbget-zig">
+		</div>
+		<img src="../public/images/165.png" class="arrow-here flr">
+		<div class="attent-status">
+			<img src="../public/images/166.png">
+		</div>
+		<div class="button-style mt82">
+			<button type="button" class="hb-share-but br5 fwb">
+				<i class="hhm-hb-ico mr12 mt-3"></i>继续分享领红包
+			</button>
+		</div>
+	</div>
+</div>
+<!-- 非关注态获取红包后提醒-->
+<div class="wxReward" id="wxUnSubscribe" style="display: none">
+	<div class="mask opac8"></div>
+	<div class="hb-bomb">
+		<div class="ht-xx-sty2">
+			<img src="../public/images/163.png" class="hbget-zig">
+		</div>
+		<img src="../public/images/165.png" class="arrow-here flr">
+		<div class="attent-status">
+			<img src="../public/images/167.png">
+		</div>
+		<div class="button-style mt82">
+			<button type="button" class="hb-share-but br5 fwb">
+				<i class="hhm-hb-ico mr12 mt-3"></i>继续分享领红包
+			</button>
+		</div>
+	</div>
+</div>
+<!-- 红包派完了-->
+<div class="wxReward" id="wxRewardEnd" style="display: none">
+	<div class="mask opac8"></div>
+	<div class="hb-bomb ptc140">
+		<div class="ht-xx-sty">
+			<img src="../public/images/160.png" class="hbtk-zig">
+		</div>
+		<div class="button-style mt82">
+			<button type="button" class="hb-share-but br5 fwb">
+				<i class="hhm-hb-ico mr12 mt-3"></i>继续分享领红包
+			</button>
+		</div>
+	</div>
+</div>
+<!-- 微信现金分享得红包提示截至-->
+<script>
+    var flowPackge = '';
+    var jid = parseInt('2724126');
+    var allowCounts = 0;
+    var alreadyCounts = 0;
+    var allowShareCashCounts = 0;
+    var alreadyShareCashCounts = 0;
+    var shareTitle = '';
+    var shareContents = '';
+    $(document).ready(function(){
+        $('#conShare').bind('click', function () {
+            clearSessionGo();
+        });
+
+        $('#conShare10').bind('click', function () {
+            clearSessionGo();
+        });
+
+        $('#conShare20').bind('click', function () {
+            clearSessionGo();
+        });
+
+        $('#conShareno').bind('click', function () {
+            clearSessionGo();
+        });
+
+        $('.hb-share-but').bind('click', function () {
+            clearSessionGo();
+        });
+		/*$('.wxReward').bind('click',function(){
+		 $(this).hide();
+		 });*/
+        if(flowPackge){
+            if('')
+                allowCounts = parseInt('');
+            if('')
+                alreadyCounts = parseInt('');
+            if('')
+                allowShareCashCounts = parseInt('');
+            if('')
+                alreadyShareCashCounts = parseInt('');
+        }
+        if((allowCounts == 0 && alreadyCounts == 0) && (allowShareCashCounts == 0 && alreadyShareCashCounts == 0)){
+            flowPackge = null;
+        }
+        shareTitle = '';
+        shareContents = '';
+        if(!shareTitle) shareTitle = '【香草招聘】世纪天语正在招聘知名打车神器-网络在线客服，哎呦~不错哦！';
+        if(!shareContents) shareContents = '小伙伴们都在香草招聘找到了好工作，你~还等什么？';
+
+
+        if(isWeiXin()) {
+            if(flowPackge != null){
+                rewardFlowShow();
+            }else {
+                rewardFlowHide();
+            }
+            onMenuShareAppMessage(shareTitle, shareContents, contextPath + "/jd/2724126?_ch=share.web", sharetimeline, 'http://p.xiangcaozhaopin.com/9608599141811.png');
+            onMenuShareQQ(shareTitle, shareContents, contextPath + "/jd/2724126", sharetimeline, 'http://p.xiangcaozhaopin.com/9608599141811.png');
+        }
+    });
+	/*清除历史数据缓存并跳转首页*/
+    function clearSessionGo(){
+        firstDocH = $(document).height();
+        try{
+            window.sessionStorage.removeItem("scrollTop");
+            window.sessionStorage.removeItem("firstDocH");
+            window.sessionStorage.removeItem("oldObjs");
+            window.sessionStorage.removeItem("totalSize");
+            window.sessionStorage.removeItem("resultSize");
+            window.sessionStorage.removeItem("start");
+            window.sessionStorage.removeItem("catgoryHis");
+            window.sessionStorage.removeItem("jobid");
+        } catch(oException){}
+        window.location.href = "/mob";
+    }
+</script><!--选择面试时间-->
+<div class="conform-box select-timb sel-timb-js">
+	<p class="cf-b-title">请选择面试时间</p>
+	<ul class="select-multim bort-ebe sel-multim-js">
+		<li class="borradius ">
+			<div class="time">
+				<span class="date">5月4日(今天)15:30</span>
+				<span class="jobid" style="display:none">2683586</span>
+			</div>
+		</li>
+		<li class="borradius ">
+			<div class="time">
+				<span class="date">5月5日(明天)15:30</span>
+				<span class="jobid" style="display:none">2724126</span>
+			</div>
+		</li>
+	</ul>
+	<p class="stime-text lh1 f14 colff8" style="display: none;">已选好，记得按时参加面试哦</p>
+	<div class="cf-b-buttontwo bort mt10">
+		<span class="cf-b-bt-no borr" onclick="think();">再看看</span>
+		<span class="cf-b-bt-yes" onclick="moreTimeApply();">确定</span>
+	</div>
+</div>
+<div id="loading" class="load-uping load-import" style="display: none">
+	<img src="../public/images/133.png" class="loading">
+	<p class="text">请稍候</p>
+</div><style>
+	a,a:hover{ text-decoration:none; color:#333}
+</style>
+<script src="../public/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../public/js/maps.js"></script>
+<script src="../public/js/amap.js"></script>
+<script>
+    var fs_resize=function(){
+        var w=$(window).width();
+        var fs = 0;
+        if(w>750){
+            fs=100;
+        } else{
+            fs = 100 * w / 750;
+        }
+        $('html').css({'fontSize':fs});
+    };
+    fs_resize();
+    $(window).resize(function(){
+        fs_resize();
+    })
+
+    $(function(){
+        initLoad();
+        //	视频播放按钮
+        $('.video-play').on('click',function(){
+            $('.video-mask').hide();
+            myVideo.play();
+        });
+
+        $("#richText").width($(window).width()-20);
+        $('#richText').css({'max-width':'100%'});;
+        $('#xcAuth').removeClass('gray');
+        upDn();
+        getBrowserLocation();
+        getDistance();
+        //下载app
+        leadDownload();
+        closeInit();
+        //咨询按钮点击事件
+        //zxInit();
+        rewardInit();
+
+        //	选择面试时间
+        $('.sel-multim-js li').on('click',function(){
+            if(!$(this).hasClass('cancel')){
+                $(this).addClass('cur').siblings().removeClass('cur');
+                $(this).parent().siblings('.stime-text').show();
+            }
+        });
+
+        //多个面试时间折叠
+		/*$('.multi-time p.mlt-status').on('click',function(){
+		 var sta_text=$(this).html();
+		 if(sta_text=='更多'){
+		 $(this).html('收起').parent().removeClass('h22');
+		 }else{
+		 $(this).html('更多').parent().addClass('h22');
+		 }
+		 });*/
+
+        $('.multi-time').on('click',function(){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_更多面试时间',1]);
+            var statusObj = $('.multi-time p.mlt-status');
+            var sta_text = statusObj.html();
+            if(sta_text == '更多'){
+                statusObj.html('收起').parent().removeClass('h22');
+            }else{
+                statusObj.html('更多').parent().addClass('h22');
+            }
+        })
+
+        $('.btnFair').bind("click",function(){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_招聘会',1]);
+            window.location.href = "/mob/jobFair/index";
+        });
+
+
+    });
+
+    function initLoad(){
+        var applySuccessRefresh = getSessionStorageValue('applySuccessRefresh');
+        if (applySuccessRefresh && (applySuccessRefresh == 'true' || applySuccessRefresh == true)) {
+            setSessionStorageValue('applySuccessRefresh', false);
+            window.location.reload();
+        }
+    }
+    //举报
+    function toComplain() {
+        var xuid = getLocalStorageValue('xuid');
+        if(xuid)
+            window.location.href="/mob/feedBacks/toComplain?jobId=2724126";
+        else
+            goLogin('/login/index', '', encodeURI(window.location.href));
+    }
+    //选择面试时间弹框显示
+    function sel_timb(){
+        $('.sel-timb-js').show().siblings('.mask').show();
+    }
+
+    //多面试时间申请职位
+    function moreTimeApply(){
+        _hmt.push(['_trackEvent','详情页', 'click', '详情_选择面试时间',1]);
+        var jobid = $(".select-multim").find(".cur").find(".jobid").text();
+        if(!jobid){
+            allert_tanlong("请选择一个面试时间");
+            return false;
+        }
+        $('.sel-timb-js').hide().siblings('.mask').hide();
+        applyJob(jobid);
+    }
+
+    //预约面试再想想
+    function think(){
+        $('.stime-text').hide();
+        $('.sel-multim-js li').each(function(){
+            $(this).removeClass('cur');
+        });
+        $('.sel-timb-js').hide().siblings('.mask').hide();
+        //window.location.reload();
+    }
+
+    function getDistance(){
+        //计算面试地址距离
+        var coordinate = 'Coordinate{lat=30.686199, lon=103.954297}', locationNote = '青羊区腾飞大道229号...';
+        if('103.954297' == '' || '30.686199' == ''){
+            $('#amapLocationTip').html('该工作地址不精确，无法计算距离');
+        }else if(coordinate && '103.954297' && '30.686199') {
+            var jdLng = '103.954297';
+            var jdLat = '30.686199';
+            setDistance(jdLng, jdLat)
+        } else if(locationNote && locationNote.indexOf('...') < 0) {
+            var geocoder = new AMap.Geocoder({
+                radius: 1000 //范围，默认：500
+            });
+            //地理编码,返回地理编码结果
+            geocoder.getLocation(locationNote, function (status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                    var geocode = result.geocodes;
+                    for (var i = 0; i < geocode.length; i++) {
+                        var jdLng = geocode[i].location.getLng();
+                        var jdLat = geocode[i].location.getLat();
+                        setDistance(jdLng, jdLat);
+                    }
+                }
+            });
+        }
+    }
+
+    function setDistance(jdLng , jdLat){
+        var chooseLng = getLocalStorageValue('chooseLng');
+        var chooseLat = getLocalStorageValue('chooseLat');
+        if(jdLng && jdLat && chooseLng && chooseLat){
+            console.log(jdLng +','+ jdLat +','+ chooseLng +','+ chooseLat);
+            var jdLnglat = new AMap.LngLat(jdLng, jdLat);
+            var distance = jdLnglat.distance([chooseLng,chooseLat]);
+            var amapLocationTip = '';
+            if(distance >= 0){
+                if((distance / 1000) > 1)
+                    amapLocationTip += ('距离'+toDecimal((distance / 1000), 10) + '公里');
+                else
+                    amapLocationTip += ('距离'+toDecimal(distance, 10) + '米');
+            }
+            if(amapLocationTip)
+                $('#amapLocationTip').html(amapLocationTip);
+
+            var transferOptions = {
+                city: getCookie('chooseCity') || '北京',
+                policy: AMap.TransferPolicy.LEAST_TIME //乘车策略
+            };
+            //构造公交换乘类,您如果想修改结果展现效果，请参考页面：http://lbs.amap.com/fn/css-style/
+            var transfer = new AMap.Transfer(transferOptions);
+            transfer.search(new AMap.LngLat(jdLng, jdLat), new AMap.LngLat(chooseLng, chooseLat), function(status, result){
+                if(status == 'complete' && result){
+                    var plans = result.plans;
+                    if(plans && plans.length > 0){
+                        var firstPlan = plans[0];
+                        if(firstPlan){
+                            //var distance = firstPlan.distance;
+                            var time = firstPlan.time;
+                            if(time){
+                                if(amapLocationTip) amapLocationTip += ",";
+                                amapLocationTip += ('预计耗时' + secondToDate(time));
+                            }
+                            if(amapLocationTip)
+                                $('#amapLocationTip').html(amapLocationTip);
+                        }
+                    } else {
+                        if(amapLocationTip && distance < 3000)
+                            $('#amapLocationTip').html(amapLocationTip + ',预计5分钟内到达');
+                    }
+                } else {
+                    if(amapLocationTip && distance < 3000)
+                        $('#amapLocationTip').html(amapLocationTip + ',预计5分钟内到达');
+                }
+            });
+        } else if(!jdLng || !jdLat){
+            $('#amapLocationTip').html('该工作地址不精确，无法计算距离');
+        } else {
+            $('#amapLocationTip').html('未获取到您的具体位置，无法计算距离');
+        }
+    }
+
+    function leadDownload(){
+        $('.downl-but').on("click",function(){
+            commonDlApp('job?id=2724126');
+        });
+        $('.downl-text').on("click",function(){
+            commonDlApp('job?id=2724126');
+        });
+    }
+
+    function downLoadApp() {
+        commonDlApp('job?id=2724126');
+    }
+
+    function closeInit(){
+        var addclose='';
+        try{addclose = window.sessionStorage.getItem("addclose")} catch(oException){}
+        if(addclose){
+            $('#close-but').parent().hide();
+            $('#head').removeClass('top61');
+            //$('.more-fixh').hide();
+            if ($('.dg-h61') && $('.dg-h61').length > 0)
+                $('.dg-h61').hide();
+            //$('.scd-fixft .fixft-close').parent().siblings('.scd').removeClass('mb110').addClass('pb50');
+        }
+
+        $('.close-but').bind('click',function(){
+            $(this).parent().hide();
+            if($('.dg-h61') && $('.dg-h61').length>0)
+                $('.dg-h61').hide();
+            //$(this).parent().siblings('.scd').removeClass('mb110').addClass('pb50');
+            if($('#head') && $('#head').length>0)
+                $('#head').removeClass('top61');
+            try{
+                window.sessionStorage.setItem("addclose","close");
+            }catch(oException){}
+
+        });
+    }
+
+    function zxInit(){
+        $('#borl-ab').bind("click", function () {
+            goUrl('', contextPath + "/im/index?jobId=2724126");
+            //push(window.location.href);
+            //window.location.href='/mob/wechats?jobid=2724126&referrer='+encodeURI(window.location.href);
+			/*$.ajax({
+			 url:"/mob/login/isLogin",
+			 type:"GET",
+			 dataType:"json",
+			 success:function(data){
+			 if (data.retnStr=="ok") {
+			 push(window.location.href);
+			 window.location.href = '/mob/im/index?jobId=2724126';
+			 }else {
+			 pushAfterLogin(contextPath + "/im/index?jobId=2724126");
+			 //window.location.href = "/mob/login/index";
+			 goLogin('/login/index');
+			 }
+			 }
+			 });*/
+        });
+    }
+
+    function telInit(){
+        $('.telphone').bind("click", function () {
+            //push(window.location.href);
+            window.location.href='tel:13881833816';
+        });
+    }
+    function rewardInit(){
+        if(isWeiXin()) {
+            $('.scd-share-js').bind('click',function(){
+                $('#mod_player').css({'position':'fixed','top':'100000px'});
+                $(this).parent().parent().siblings('.share-hidbox').show();
+                $(this).parent().parent().siblings('.share-mask').show();
+            });
+            $('.share-hid-js').bind('click',function(){
+                $('#mod_player').css({'position':'relative','top':'0'});
+                $(this).hide();
+                $(this).siblings('.share-mask').hide();
+            });
+        }
+    }
+    function upDn(){
+        /** 晋升空间*/
+        assembleUpDn('promotion');
+        /** 薪资说明*/
+        assembleUpDn('salaryNote');
+        /** 上班时间*/
+        assembleUpDn('worktime');
+        /** 福利要求*/
+        assembleUpDn('welfare');
+        /** 工作要求*/
+        assembleUpDn('requirement');
+        /** 工作职责*/
+        assembleUpDn('responsibility');
+        /** 温馨提升*/
+        assembleUpDn('comments');
+    }
+    $(function () {
+        //判断是否宽屏
+        var winWide = $(window).width();
+        var wideScreen = false;
+        if (winWide <= 375) {//375及以下分辨率
+            $(".commentsUp").click(function () {
+				$(".scd-d-cnotice").show();
+            })
+        }
+    })
+
+    $('.scd-d-upmore').on('click',function(){
+        var prev = $(this).prev();
+        var child = $(this).children('.scd-d-hide');
+        if(prev.hasClass('desc')){
+            prev.removeClass('desc');
+            child.addClass('topbtn');
+            child.html('收起信息');
+        }else{
+            prev.addClass('desc');
+            child.removeClass('topbtn');
+            child.html('查看全部');
+        }
+    });
+
+    function assembleUpDn(id){
+        if($('#'+id+'P')){
+            var contentHeight = $('#'+id+'P').height();
+            if(contentHeight && contentHeight > 96){
+				/*
+				 <div id="worktimeUp" class="scd-d-upmore"></div>
+				 <div id="worktimeDn" class="scd-d-hide dn"></div>
+				 */
+                var updn = '<div id="'+id+'Up" class="scd-d-upmore"><i></i><span>查看全部</span></div><div id="'+id+'Dn" class="scd-d-hide dn"><i></i><span>收起</span></div>';
+                $('#'+id+'P').addClass('twoover').after(updn);
+            }
+        }
+
+        if($('#'+id+'Up') && $('#' + id + 'Dn')) {
+            $('#' + id + 'Up').bind("click", function () {
+                $(this).addClass("dn").prev('.twoover').removeClass("twoover");
+                $('#' + id + 'Dn').removeClass("dn");
+            });
+            $('#'+id+'Dn').bind("click",function(){
+                $(this).addClass("dn").parent('div').children('p').addClass("twoover");
+                $('#'+id+'Up').removeClass("dn");
+            });
+            if($('#'+id+'P')) {
+                $('#' + id + 'P').bind("click", function () {
+                    var contentHeight = $('#' + id + 'P').height();
+                    if (contentHeight && contentHeight > 96) {
+                        $('#' + id + 'Dn').addClass("dn").parent('div').children('p').addClass("twoover");
+                        $('#' + id + 'Up').removeClass("dn");
+                    } else {
+                        $('#' + id + 'Up').addClass("dn").prev('.twoover').removeClass("twoover");
+                        $('#' + id + 'Dn').removeClass("dn");
+                    }
+                });
+            }
+        }
+    }
+
+    function companyDetail(jdId, companyId){
+        push(window.location.href);
+        window.location.href = '/mob/com/'+companyId+'?jobId=' + jdId;
+    }
+    var sr = getUrlParam('sr');
+    //申请职位
+    var checkSubmitFlag = false;
+    function applyJob(jobId){
+        if(!sr){
+            sr = '';
+        }
+        if(checkSubmitFlag) return;
+        $('#loading').show();
+        checkSubmitFlag = true;
+        $.ajax({
+            url:"/mob/applyJob/apply/"+jobId,
+            data: {},
+            type:"POST",
+            dataType:"json",
+            success:function(data){
+                if (data.retnStr=="login") {
+                    //allert_tanshort("请先登陆");
+                    push(window.location.href);
+                    var referrer = window.location.href;
+                    if(referrer.indexOf('?') > 0){
+                        referrer += '&afterLogin=jobapply';
+                    } else {
+                        referrer += '?afterLogin=jobapply';
+                    }
+                    pushAfterLogin(referrer);
+                    //window.location.href = "/mob/login/index?afterLogin=jobapply&referrer="+encodeURI(window.location.href);
+                    goLogin('/login/index', 'jobapply', encodeURIComponent(referrer));
+                }else if (data.retnStr=="job_not_found") {
+                    allert_tanshort("无此职位");
+                    if(quickApply)
+                        quickApplyBdtj(false);
+                }else if (data.retnStr=="job_closed") {
+                    allert_tanshort("已停止申请");
+                    if(quickApply)
+                        quickApplyBdtj(false);
+                }else if (data.retnStr=="already_applied") {
+                    allert_tanshort("已申请过");
+                    if(quickApply)
+                        quickApplyBdtj(false);
+
+                } else if((data.acrequired && data.experienced) || (data.acrequired && data.educationed) || (data.acrequired && data.qualified)
+                    || (data.experienced && data.educationed) || (data.experienced && data.qualified) || (data.educationed && data.qualified)){
+                    replacePush();
+                    allert_tanlong("请完善公司要求");
+                    setTimeout("window.location.href='/mob/resumes/jobapply/"+jobId+"?sr="+sr+"&jdreferrer=" + encodeURI(window.location.href) + "'",2000);
+                } else if(data.qualified){
+                    replacePush();
+                    allert_tanshort("请完善简历");
+                    setTimeout("window.location.href='/mob/resumes/experiences?sr="+sr+"+&jobId="+jobId+"&agentApply=true&referrer=" + encodeURI(window.location.href)+"'",2000);
+                } else if(data.acrequired){
+                    replacePush();
+                    allert_tanlong("请上传学历证书");
+                    setTimeout("window.location.href='/mob/resumes/ac?sr="+sr+"&agentApply=true&jobId="+jobId+"&referrer=" + encodeURI(window.location.href)+"'",2000);
+                } else if(data.experienced){
+                    replacePush();
+                    allert_tanlong("请完善工作经历");
+                    if(checkWork() > 1)
+                        setTimeout("window.location.href='/mob/resumes/experiences?sr="+sr+"&agentApply=true&jobId="+jobId+"&jdreferrer=" + encodeURI(window.location.href)+ "'",2000);
+                    else
+                        setTimeout("window.location.href='/mob/resumes/experienceEdit?sr="+sr+"&agentApply=true&idx=1&jobId="+jobId+"&jdreferrer=" + encodeURI(window.location.href)+ "'",2000);
+                } else if(data.educationed){
+                    replacePush();
+                    allert_tanlong("请完善教育经历");
+                    setTimeout("window.location.href='/mob/resumes/educationEdit?sr="+sr+"&agentApply=true&jobId="+jobId+"&jdreferrer=" + encodeURI(window.location.href)+ "'",2000);
+                } else if (data.retnStr=="too_many_applications") {
+                    allert_tanlong("您申请中的职位数已达到40个，请结束一些后再申请");
+                } else if (data.retnStr=="too_many_daily_applications") {
+                    allert_tanlong("今天申请机会已用尽，请明日再来");
+                } else if(data.retnStr=="ok"){
+                    if(sr == 'sessionOnly'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_好工作',1]);
+                    }else if(sr == 'search'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_搜索',1]);
+                    }else if(sr == 'withoutSession'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_淘工作',1]);
+                    }else if(sr == 'company'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_公司详情_在招职位',1]);
+                    }else if(sr == 'album'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_运营职位',1]);
+                    }else if(sr == 'leadDownload'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_引导下载_推荐列表',1]);
+                    }else if(sr == 'qrcode'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_引导关注_推荐列表',1]);
+                    }else if(sr == 'feedback'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_进展列表_推荐职位',1]);
+                    }else if(sr == 'im'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_职位咨询_邀请投递',1]);
+                    }else if(sr == 'singlemessage' || sr == 'timeline'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_分享',1]);
+                    }else if (sr == 'autoreply'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_自动回复',1]);
+                    }else if(sr == 'homeCustomJob'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_好工作订阅职位弹层_订阅职位常设页',1]);
+                    }else if(sr == 'customJob'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_订阅职位编辑页_订阅职位常设页',1]);
+                    }else if(sr == 'customView'){
+                        _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_好工作_订阅职位常设页',1]);
+                    }
+                    if(quickApply){
+                        quickApplyBdtj(true);
+                    }
+                    replacePush();
+
+                    $(".interv-but").addClass("bg-gray");
+                    $(".interv-but").removeAttr("onclick");
+
+                    var chooseLng = getLocalStorageValue("chooseLng", true);
+                    var chooseLat = getLocalStorageValue("chooseLat", true);
+
+                    if(isWeiXin()){
+                        if(chooseLng && chooseLat)
+                            window.location.href = "/mob/qrcodeSub/"+jobId+"?chooseLng="+chooseLng+"&chooseLat="+chooseLat;
+                        else
+                            window.location.href = "/mob/qrcodeSub/"+jobId;
+                    } else {
+                        if("" != ""){
+                            //TODO 专场号有何作用?
+                            if(chooseLng && chooseLat)
+                                window.location.href = "/mob/leadDownLoad/"+jobId+"?albumId=${albumId}&chooseLng="+chooseLng+"&chooseLat="+chooseLat;
+                            else
+                                window.location.href = "/mob/leadDownLoad/"+jobId+"?albumId=${albumId}";
+                        }else{
+                            if(chooseLng && chooseLat)
+                                window.location.href = "/mob/leadDownLoad/"+jobId+"?chooseLng="+chooseLng+"&chooseLat="+chooseLat;
+                            else
+                                window.location.href = "/mob/leadDownLoad/"+jobId;
+                        }
+                    }
+                } else {
+                    allert_tanshort("申请失败");
+                    if(quickApply)
+                        quickApplyBdtj(false);
+
+                }
+                $('#loading').hide();
+                setTimeout(function(){
+                    checkSubmitFlag = false;
+                },2000);
+            },
+            error: function () {
+                checkSubmitFlag = false;
+                $('#loading').hide();
+            }
+        });
+    }
+    function quickApplyBdtj(flag){
+        if(flag)
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_快速登录_预约成功',1]);
+        else
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_快速登录_预约失败',1]);
+    }
+    /**
+     * 确认申请提示框
+     */
+    function conform_apply(){
+        var jobid = $(".select-multim").find(".jobid").text();
+        $.ajax({
+            url:"/mob/applyJob/surplus",
+            data: {},
+            type:"POST",
+            async:false,
+            dataType:"json",
+            success:function(data){
+                //if(data.retnStr && data.retnStr != "nologin") {
+                var htmlValue = "您确定要申请该职位吗？";
+                if(data.retnStr == 'too_many_applications'){
+                    allert_tanlong("您申请中的职位数已达到40个，请结束一些后再申请");
+                    return false;
+                }
+                if(parseInt(data.surplus) < 1) {
+                    allert_tanlong("今天申请机会已用尽，请明日再来");
+                    return false;
+                }
+                if(parseInt(data.surplus) < 5)
+                    htmlValue = '您今天还有<span class="cf-b-bt-yes">' + data.surplus + '</span>个申请机会，确定要申请该职位吗？';
+                var newalert = '<div class="conform-bac"></div>';
+                newalert += '<div class="conform-box confirm-tip">';
+                newalert += '<p class="cf-b-notice">' + htmlValue + '</p>';
+                newalert += '<div class="cf-b-buttontwo bort">';
+                newalert += '<span class="cf-b-bt-no borr" onclick="removeTips(\'canel\');">取消</span>';
+                newalert += '<span class="cf-b-bt-yes" onclick="removeTips(\'confirm\');applyJob('+jobid+');">确定</span>';
+                newalert += '</div>';
+                newalert += '</div>';
+                $('body').append(newalert);
+                hold_conform_bac();
+                //} else
+                //	applyJob(jobid);
+            }
+        });
+    }
+    var quickApply = false;//统计快速预约
+    //快速预约判断
+    function resumeValid() {
+        if($(".spedt-comrs") != null && $(".spedt-comrs").length > 0){
+            quickApply = true;
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_快速预约_未登录',1]);
+            validResume();
+        } else{//已登录 预约
+            if(uid)
+                _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_已登录',1]);
+            sel_timb();
+        }
+    }
+
+    //删除弹出对话框
+    function removeTips(flag){
+        if(flag == 'confirm'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_预约面试_确认',1]);
+        } else if(flag == 'canel') {
+            _hmt.push(['_trackEvent', '详情页', 'click', '详情_预约面试_取消', 1]);
+        }
+        $('.conform-bac,.confirm-tip').remove();
+        $('.stime-text').hide();
+        $('.sel-multim-js li').each(function(){
+            $(this).removeClass('cur');
+        });
+        $('.sel-timb-js').hide().siblings('.mask').hide();
+    }
+
+    var checkWork = function(){
+        var workList = 0;
+        $.ajax({
+            url: "/mob/resumes/checkWorks",
+            type: "POST",
+            async: false,
+            success: function(data) {
+                if(data.workList)
+                    workList = data.workList;
+                else
+                    workList = 0;
+            },
+            error: function() {
+                workList = 0;
+            }
+        });
+        return workList;
+    }
+</script>
+<script>
+    window.onload=function(){
+        $('.nbod-radb').css('border','1px solid #ddd');
+    }
+    /**
+     * 模拟微信图片浏览
+     */
+    if(isWeiXin()) {
+        $(".scd-showp-img").bind("click", function () {
+            wx.previewImage({
+                current: "http://p.xiangcaozhaopin.com/8438127407989.png",
+                urls: [
+                    "http://p.xiangcaozhaopin.com/8438127407989.png"
+                    ,
+                    "http://p.xiangcaozhaopin.com/8438214010166.png"
+                    ,
+                    "http://p.xiangcaozhaopin.com/8438380902447.png"
+                    ,
+                    "http://p.xiangcaozhaopin.com/8438467375706.png"
+                ]
+            });
+        });
+    } else {
+        $(".scd-showp-img").bind("click", function(){
+            var aImgSrc=[];
+            aImgSrc.push("http://p.xiangcaozhaopin.com/8438127407989.png");
+            aImgSrc.push("http://p.xiangcaozhaopin.com/8438214010166.png");
+            aImgSrc.push("http://p.xiangcaozhaopin.com/8438380902447.png");
+            aImgSrc.push("http://p.xiangcaozhaopin.com/8438467375706.png");
+            ImageView(0,aImgSrc);
+        });
+    }
+
+
+    $(window).load(function() {
+    });
+</script>
+
+
+
+<div class="l50"></div>
+<script>
+    function goHome(type, city) {
+        statistics(type);
+        if(city)
+            setCookie('chooseCity', city);
+
+        window.location.href = '/mob/specialJob/index?bch=fwh';
+    }
+    var unifyURL = '/mob/jobinfo';
+    function statistics(type){
+        if(type == 'work'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_上班地址地图',1]);
+        }else if(type == 'interview'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_面试地址地图',1]);
+        }else if(type == 'compDetail'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_查看公司详情',1]);
+        }else if(type == 'careline'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_在线咨询',1]);
+        }else if(type == 'tel'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_电话咨询',1]);
+        }else if(type == 'share'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_分享',1]);
+        }else if(type == 'jdShow'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_查看职位秀',1]);
+        }else if(type == 'goHome'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_看看其他职位',1]);
+        }
+    }
+</script>
+<script src="./世纪天语知名打车神器-网络在线客服-香草招聘成都_files/baidutj.min.js"></script>
+<script>
+    var uid = window.localStorage.getItem('xuid');
+    if(!uid)
+        _hmt.push(['_trackEvent', '详情页', 'click', '详情_未登录', 1]);
+    try{
+        if(sr == 'sessionOnly'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_好工作',1]);
+        }else if(sr == 'search'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_搜索',1]);
+        }else if(sr == 'withoutSession'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_淘工作',1]);
+        }else if(sr == 'company'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_公司详情_在招职位',1]);
+        }else if(sr == 'album'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_运营职位',1]);
+        }else if(sr == 'leadDownload'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_引导下载_推荐列表',1]);
+        }else if(sr == 'qrcode'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_引导关注_推荐列表',1]);
+        }else if(sr == 'feedback'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_进展列表_推荐职位',1]);
+        }else if(sr == 'im'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_职位咨询_邀请投递',1]);
+        }else if(sr == 'singlemessage' || sr == 'timeline'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_分享',1]);
+        }else if(sr == 'homeCustomJob'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_好工作订阅职位弹层_订阅职位常设页',1]);
+        }else if(sr == 'customJob'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_订阅职位编辑页_订阅职位常设页',1]);
+        }else if(sr == 'customView'){
+            _hmt.push(['_trackEvent','详情页', 'click', '详情_来源_好工作_订阅职位常设页',1]);
+        }
+    }catch (err){
+        console.log(err);
+    }
+</script>
+
+</body>
+</html>
+        
+        
+        
+        
+        

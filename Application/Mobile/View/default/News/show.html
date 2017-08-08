@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<qscms:news_show 列表名="info" 资讯id="$_GET['id']" />
+    <include file="public:meta" />
+    <link rel="stylesheet" href="../public/css/news.css">
+</head>
+<body>
+<include file="public:header" />
+
+<div class="news-show">
+    <h1 class="font18">{$info['title']}</h1>
+    <div class="attribute font13">
+        <qscms:news_property 列表名="property" 分类id="$info['focos']" />
+        <div class="category">分类: {$property['categoryname']}</div>
+        <div class="pic page-views" id="clicknum"></div>
+        <div class="pic time">{:date('Y-m-d',$info['addtime'])}</div>
+        <div class="clear"></div>
+    </div>
+    <div class="content link_blue">{$info['content']}</div>
+</div>
+<div class="list-split-block"></div>
+<include file="public:footer_min" />
+<script type="text/javascript">
+    $.getJSON("{:U('AjaxCommon/news_click')}",{id:"{$info['id']}"},function(result){
+        if(result.status==1){
+            $("#clicknum").html(result.data);
+        }
+    });
+</script>
+</body>
+</html>

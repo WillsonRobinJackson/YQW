@@ -1,0 +1,72 @@
+[ 2017-08-02T09:35:08+08:00 ] 127.0.0.1 /index.php?XDEBUG_SESSION_START=19652
+INFO: Cron:ClearPromotion Runat 2017-08-02 09:35:08 Use 0.138000 s 
+Cron:AutoApplyJobs Runat 2017-08-02 09:35:08 Use 0.000000 s 
+Cron:AutoRefreshResume Runat 2017-08-02 09:35:08 Use -0.009000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 09:35:08 Use -0.015000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 09:35:08 Use -0.017000 s 
+Cron:ClearOrder Runat 2017-08-02 09:35:08 Use -0.096000 s 
+
+[ 2017-08-02T10:21:13+08:00 ] 127.0.0.1 /index.php?m=Admin&c=index&a=top_menu
+INFO: Cron:ClearPromotion Runat 2017-08-02 10:21:13 Use 0.019000 s 
+Cron:AutoRefreshResume Runat 2017-08-02 10:21:13 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 10:21:13 Use -0.004000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 10:21:13 Use -0.006000 s 
+
+[ 2017-08-02T11:08:25+08:00 ] 127.0.0.1 /index.php?m=admin&c=index&a=index
+INFO: Cron:ClearPromotion Runat 2017-08-02 11:08:25 Use 0.017000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 11:08:25 Use 0.000000 s 
+
+[ 2017-08-02T11:11:50+08:00 ] 127.0.0.1 /index.php?XDEBUG_SESSION_START=11115
+INFO: Cron:AutoRefreshResume Runat 2017-08-02 11:11:50 Use 0.019000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 11:11:50 Use 0.000000 s 
+
+[ 2017-08-02T13:33:29+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Index&a=left_menu&menuid=194
+INFO: Cron:ClearPromotion Runat 2017-08-02 13:33:29 Use 0.018000 s 
+Cron:AutoRefreshResume Runat 2017-08-02 13:33:29 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 13:33:29 Use -0.003000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 13:33:29 Use -0.005000 s 
+
+[ 2017-08-02T13:33:29+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Jobs&a=index&menuid=194&child=1
+INFO: Cron:ClearPromotion Runat 2017-08-02 13:33:29 Use 0.029000 s 
+Cron:AutoRefreshResume Runat 2017-08-02 13:33:29 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 13:33:29 Use -0.005000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 13:33:29 Use -0.007000 s 
+
+[ 2017-08-02T14:01:48+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Jobs&a=index&menuid=194&child=1
+INFO: Cron:ClearPromotion Runat 2017-08-02 14:01:48 Use 0.028000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 14:01:48 Use -0.001000 s 
+
+[ 2017-08-02T14:10:13+08:00 ] 127.0.0.1 /index.php?m=admin&c=index&a=index
+INFO: Cron:AutoRefreshResume Runat 2017-08-02 14:10:13 Use 0.019000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 14:10:13 Use 0.000000 s 
+
+[ 2017-08-02T15:13:58+08:00 ] 127.0.0.1 /index.php?m=&c=personal&a=refresh_resume
+INFO: Cron:ClearPromotion Runat 2017-08-02 15:13:58 Use 0.017000 s 
+Cron:AutoRefreshResume Runat 2017-08-02 15:13:58 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 15:13:58 Use -0.003000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 15:13:58 Use -0.004000 s 
+
+[ 2017-08-02T16:01:37+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Index&a=left_menu&menuid=1
+INFO: Cron:ClearPromotion Runat 2017-08-02 16:01:37 Use 0.017000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 16:01:37 Use 0.000000 s 
+
+[ 2017-08-02T16:01:37+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Config&a=index&menuid=1&child=1
+INFO: Cron:ClearPromotion Runat 2017-08-02 16:01:37 Use 0.029000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 16:01:37 Use 0.000000 s 
+
+[ 2017-08-02T16:44:20+08:00 ] 127.0.0.1 /index.php?m=&c=index&a=index
+INFO: Cron:AutoRefreshResume Runat 2017-08-02 16:44:20 Use 0.019000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 16:44:20 Use 0.000000 s 
+
+[ 2017-08-02T17:04:35+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Article&a=index&menuid=112&child=1
+INFO: Cron:ClearPromotion Runat 2017-08-02 17:04:35 Use 0.026000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 17:04:35 Use -0.001000 s 
+
+[ 2017-08-02T17:04:35+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Index&a=left_menu&menuid=112
+INFO: Cron:ClearPromotion Runat 2017-08-02 17:04:35 Use 0.026000 s 
+Cron:ClearExpiredSetmeal Runat 2017-08-02 17:04:35 Use 0.000000 s 
+
+[ 2017-08-02T17:18:17+08:00 ] 127.0.0.1 /index.php?m=&c=index&a=index
+INFO: Cron:AutoRefreshResume Runat 2017-08-02 17:18:17 Use 0.011000 s 
+Cron:AutoRefreshJobs Runat 2017-08-02 17:18:17 Use 0.000000 s 
+

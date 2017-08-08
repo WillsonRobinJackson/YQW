@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<qscms:news_category 列表名="info" 资讯小类="$_GET['id']" />
+    <include file="public:meta" />
+    <link rel="stylesheet" href="../public/css/news.css">
+</head>
+<body>
+<include file="public:header" />
+<div class="news-top-menu-bar">
+	<div class="top-menu">
+		<div class="top-menu-list">
+			<a data-url="" href="{:url_rewrite('QS_newslist')}" class="t-btn <if condition="$Think.get.id eq ''">active font16</if>">热点推荐</a>
+			<qscms:news_category 列表名="category" 显示数目="7" 资讯大类="1" />
+			<volist name="category" id="vo">
+				<a data-url="" href="{:url_rewrite('QS_newslist',array('id'=>$vo['id']))}" class="t-btn <if condition="$Think.get.id eq $vo['id']">active font16</if>">{$vo['title_']}</a>
+			</volist>
+		</div>
+	</div>
+</div>
+<div class="split-block"></div>
+<qscms:news_list 列表名="list" 关键字="$_GET['key']" 分页显示="1" 资讯小类="$_GET['id']" 排序="addtime:desc" 填补字符="…" 摘要长度="200"/>
+<notempty name="list['list']">
+<volist name="list['list']" id="vo">
+<div class="news-list-item for-event" onclick="window.location='{$vo.url}'">
+    <div class="news-info">
+        <div class="thumbnail">
+            <img src="{$vo['img']}?{:time()}" border="0" />
+        </div>
+        <div class="info">
+            <div class="line-one substring">{$vo['title']}</div>
+            <div class="line-two font12 substring">
+                <div class="pic time">{:date('Y-m-d',$vo['addtime'])}</div>
+                <div class="pic page-views">{$vo['click']}</div>
+            </div>
+            <div class="line-three font12">{$vo['briefly']}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="list-split-block"></div>
+</volist>
+<div class="qspage">{$list['page']}</div>
+<else />
+    <div class="list-empty link_blue">
+        抱歉，暂时没有找到相关资讯！
+    </div>
+</notempty>
+<include file="public:footer_min" />
+</body>
+</html>

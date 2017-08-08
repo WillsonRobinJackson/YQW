@@ -1,0 +1,58 @@
+[ 2017-07-10T10:49:05+08:00 ] ::1 /index.php?m=Home&c=Members&a=ajax_check
+INFO: Cron:ClearPromotion Runat 2017-07-10 10:49:05 Use 0.231000 s 
+Cron:AutoRefreshResume Runat 2017-07-10 10:49:05 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 10:49:05 Use -0.006000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 10:49:05 Use -0.009000 s 
+
+[ 2017-07-10T11:27:08+08:00 ] ::1 /index.php?XDEBUG_SESSION_START=10136
+INFO: Cron:ClearPromotion Runat 2017-07-10 11:27:08 Use 0.106000 s 
+Cron:AutoRefreshResume Runat 2017-07-10 11:27:08 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 11:27:08 Use -0.005000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 11:27:08 Use -0.007000 s 
+
+[ 2017-07-10T12:32:40+08:00 ] ::1 /index.php?XDEBUG_SESSION_START=18164
+INFO: Cron:ClearPromotion Runat 2017-07-10 12:32:40 Use 0.051000 s 
+Cron:AutoRefreshResume Runat 2017-07-10 12:32:40 Use -0.001000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 12:32:40 Use -0.005000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 12:32:40 Use -0.007000 s 
+
+[ 2017-07-10T13:23:02+08:00 ] ::1 /index.php?m=Home&c=Members&a=login
+INFO: Cron:ClearPromotion Runat 2017-07-10 13:23:02 Use 0.009000 s 
+Cron:AutoRefreshResume Runat 2017-07-10 13:23:02 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 13:23:02 Use 0.000000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 13:23:02 Use 0.000000 s 
+
+[ 2017-07-10T14:01:26+08:00 ] ::1 /index.php
+INFO: Cron:ClearPromotion Runat 2017-07-10 14:01:26 Use 0.024000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 14:01:26 Use 0.000000 s 
+
+[ 2017-07-10T14:11:14+08:00 ] ::1 /index.php?XDEBUG_SESSION_START=19938
+INFO: Cron:AutoRefreshResume Runat 2017-07-10 14:11:14 Use 0.011000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 14:11:14 Use 0.000000 s 
+
+[ 2017-07-10T15:01:31+08:00 ] ::1 /index.php?m=Home&c=index&a=ajax_user_info
+INFO: Cron:ClearPromotion Runat 2017-07-10 15:01:31 Use 0.122000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 15:01:31 Use 0.000000 s 
+
+[ 2017-07-10T16:13:25+08:00 ] ::1 /index.php?m=Home&c=Qrcode&a=index&url=http%3A%2F%2Fwww.uqinger.com%2F%3Fm%3DMobile
+INFO: Cron:ClearPromotion Runat 2017-07-10 16:13:25 Use 0.032000 s 
+Cron:AutoRefreshResume Runat 2017-07-10 16:13:25 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 16:13:25 Use -0.032000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 16:13:25 Use -0.034000 s 
+
+[ 2017-07-10T17:04:12+08:00 ] 127.0.0.1 /index.php?m=&c=callback&a=index&mod=taobao&type=login
+INFO: Cron:ClearPromotion Runat 2017-07-10 17:04:12 Use 0.030000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 17:04:12 Use 0.000000 s 
+
+[ 2017-07-10T17:10:02+08:00 ] ::1 /index.php?m=Home&c=Captcha&t=1499677802550
+INFO: Cron:AutoRefreshResume Runat 2017-07-10 17:10:02 Use 0.020000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 17:10:02 Use 0.000000 s 
+
+[ 2017-07-10T18:08:58+08:00 ] 127.0.0.1 /?m=&c=callback&a=oauth&mod=qq&code=8E0C61427B37BFFC1D87F4150DD59D09
+INFO: Cron:ClearPromotion Runat 2017-07-10 18:08:58 Use 0.026000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-10 18:08:58 Use 0.000000 s 
+
+[ 2017-07-10T18:10:00+08:00 ] 127.0.0.1 /?m=&c=callback&a=oauth&mod=qq&code=8326961E5DB9E7531E0C29FCB54ADB41
+INFO: Cron:AutoRefreshResume Runat 2017-07-10 18:10:00 Use 0.012000 s 
+Cron:AutoRefreshJobs Runat 2017-07-10 18:10:00 Use 0.000000 s 
+

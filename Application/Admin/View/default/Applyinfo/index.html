@@ -1,0 +1,59 @@
+<include file="public:header" />
+  <div class="toptip link_g">
+
+  </div>
+  <div class="seltpye_y">
+    <div class="tit link_lan">
+      <strong>前台申请列表</strong><span>(共找到{$total}条)</span>
+      <a href="{:U('index')}">[恢复默认]</a>
+    </div>
+    <div class="clear"></div>
+    </div>
+  <form id="form1" name="form1" method="post" action="{:U('set_audit')}">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" id="list" class="link_lan">
+      	<tr>
+	      <td class="admin_list_tit admin_list_first">职位名称</td>
+	      <td align="center"  width="10%" class="admin_list_tit">姓名</td>
+	      <td align="center"  width="10%" class="admin_list_tit">手机号</td>
+	      <td align="center"  width="10%" class="admin_list_tit">性别</td>
+	      <td align="center"  width="10%" class="admin_list_tit">出生日期</td>
+	      <td align="center"  width="10%" class="admin_list_tit">期待工作地</td>
+	      <td align="center"  width="10%" class="admin_list_tit">学历</td>
+	      <td align="center"  width="10%" class="admin_list_tit">工作年限</td>
+	      <td align="center"  width="10%" class="admin_list_tit">后台是否推送</td>
+	      <td align="center"  width="10%" class="admin_list_tit">申请时间</td>
+	      
+	      <td width="100" align="center"  class="admin_list_tit">操作</td>
+	    </tr>
+      
+        <volist name="res" id="list">
+        	<tr>
+			    <td class="admin_list admin_list_first">	
+				 <a href="{:U('home/jobs/jobs_show', array('id' => $list['jobid']))}" target="_blank" style="color:#018fcf" >{$list.jobs_name}</a>		 	
+			    </td>
+		        <td class="admin_list" align="center">{$list.name}</td>
+				<td class="admin_list" align="center">{$list.phone}</td>
+				<td class="admin_list" align="center">{$list.sex}</td>
+				<td class="admin_list" align="center">{$list.age}</td>
+		        <td class="admin_list" align="center">{$list.address}</td>
+				<td class="admin_list" align="center">{$list.education}</td>
+				<td class="admin_list" align="center">{$list.year}</td>
+				<td class="admin_list" align="center">{$list.view}</td>
+				<td class="admin_list" align="center">{$list.addtime|date="m-d H:i",###}</td>
+				
+		        <td class="admin_list" align="center" >
+		        	<a href="{:U('Applyinfo/apply', array('id' => $list['id'], 'jobid' => $list['jobid']))}" onclick="return confirm('你确定要推送吗?');">推送</a> &nbsp;&nbsp;
+					<a href="{:U('Applyinfo/del_jobs', array('id' => $list['id']))}" onclick="return confirm('你确定要删除吗？');">删除</a> 
+				</td>
+	        </tr>
+      </volist>
+      </table>
+      <span id="OpAudit"></span>
+</form>
+    <if condition="!$res">
+    <div class="admin_list_no_info">没有任何信息！</div>
+    </if>
+    <div class="qspage">{$page}</div>
+    <include file="public:footer" />
+</body>
+</html>

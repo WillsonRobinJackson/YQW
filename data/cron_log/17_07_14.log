@@ -1,0 +1,32 @@
+[ 2017-07-14T14:08:28+08:00 ] 127.0.0.1 /
+INFO: Cron:ClearPromotion Runat 2017-07-14 14:08:28 Use 0.266000 s 
+Cron:AutoApplyJobs Runat 2017-07-14 14:08:28 Use -0.001000 s 
+Cron:AutoRefreshResume Runat 2017-07-14 14:08:28 Use -0.064000 s 
+Cron:AutoRefreshJobs Runat 2017-07-14 14:08:28 Use -0.067000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-14 14:08:28 Use -0.069000 s 
+Cron:ClearOrder Runat 2017-07-14 14:08:28 Use -0.080000 s 
+
+[ 2017-07-14T16:01:19+08:00 ] 127.0.0.1 /?m=&c=callback&a=oauth&mod=qq&code=3881C5633478A1D8F2CDC7E828AE100A
+INFO: Cron:ClearPromotion Runat 2017-07-14 16:01:19 Use 0.086000 s 
+Cron:AutoRefreshResume Runat 2017-07-14 16:01:19 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-14 16:01:19 Use -0.004000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-14 16:01:19 Use -0.005000 s 
+
+[ 2017-07-14T17:43:39+08:00 ] 127.0.0.1 /index.php?m=Home&c=Qrcode&a=index&url=http%3A%2F%2Fwww.uqinger.com%2F%3Fm%3DMobile
+INFO: Cron:ClearPromotion Runat 2017-07-14 17:43:39 Use 0.131000 s 
+Cron:AutoRefreshResume Runat 2017-07-14 17:43:39 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-14 17:43:39 Use -0.006000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-14 17:43:39 Use -0.008000 s 
+
+[ 2017-07-14T17:43:39+08:00 ] 127.0.0.1 /index.php?m=Home&c=captcha&t=1500025419465
+INFO: Cron:ClearPromotion Runat 2017-07-14 17:43:39 Use 0.028000 s 
+Cron:AutoRefreshResume Runat 2017-07-14 17:43:39 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-14 17:43:39 Use -0.003000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-14 17:43:39 Use -0.005000 s 
+
+[ 2017-07-14T17:43:39+08:00 ] 127.0.0.1 /index.php?m=Home&c=index&a=ajax_user_info
+INFO: Cron:ClearPromotion Runat 2017-07-14 17:43:39 Use 0.153000 s 
+Cron:AutoRefreshResume Runat 2017-07-14 17:43:39 Use 0.000000 s 
+Cron:AutoRefreshJobs Runat 2017-07-14 17:43:39 Use -0.003000 s 
+Cron:ClearExpiredSetmeal Runat 2017-07-14 17:43:39 Use -0.005000 s 
+

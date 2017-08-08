@@ -1,0 +1,36 @@
+<include file="public:header" />
+	<div class="toptip">
+		<h2>提示：</h2>
+		<p>复制短信模板内容，在第三方短信服务商平台进行模板报备，可获得该模板ID编码。</p>
+	</div>
+	<div class="toptit">编辑短信模板 <span style="color:#0033CC">{$info.name}</span></div>
+	<form action="<if condition="$info['id']">{:U('SmsOauth/edit')}<else/>{:U('SmsOauth/add')}</if>" method="post"   name="form1" id="form1">
+		<table width="100%" border="0" cellpadding="4" cellspacing="0" bgcolor="#FFFFFF"  >
+			<tr>
+				<td width="120" height="30" align="right" bgcolor="#FFFFFF" style=" border-bottom:1px #CCCCCC dashed">模板报备ID：</td>
+				<td bgcolor="#FFFFFF" style=" border-bottom:1px #CCCCCC dashed">
+					<input name="tpl_id" type="text" class="input_text_200" id="admin_name" maxlength="30" value="{$info.tpl_id}"/>（第三方短信平台获取）
+				</td>
+			</tr>
+			<tr>
+				<td height="30" align="right" bgcolor="#FFFFFF" style=" border-bottom:1px #CCCCCC dashed">接口标识：</td>
+				<td bgcolor="#FFFFFF" style=" border-bottom:1px #CCCCCC dashed" >
+					<textarea name="value" class="input_textarea_400" disabled="disabled" id="templates_value">{$info.value}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td height="30" align="right" bgcolor="#FFFFFF" >&nbsp;</td>
+				<td height="50" bgcolor="#FFFFFF" >
+					<input name="id" type="hidden" value="{$info.id}" />
+					<input name="sid" type="hidden" value="{$info.sid}" />
+			  		<input name="tid" type="hidden" value="{$info.tid}" />
+					<input type="submit" class="admin_submit"    value="保存"/>
+					<input type="button" class="admin_submit"    value="返回" onclick="window.location='{:U('SmsOauth/index',array('id'=>$info['sid']))}'"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<include file="public:footer" />
+</body>
+</html>

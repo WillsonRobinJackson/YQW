@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>招聘</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="format-detection" content="email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="stylesheet" href="style/reset.css" />
+<link rel="stylesheet" href="style/center.css" />
+
+<link rel="stylesheet" href="style/mui.poppicker.css" />
+<link rel="stylesheet" href="style/mui.picker.css" />
+<link rel="stylesheet" href="style/mui.dtpicker.css" />
+</head>
+<body >
+<div class="big-box">
+	<div class="center-box">
+		<h2>企业HR要求您完善以下简历基本信息</h2>
+		<form action="">
+			<ul>
+				<li>
+					<label for="">姓名</label>
+					<div class="input-box">
+						<input type="text" placeholder="必填">
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">性别</label>
+					<div class="input-box">
+						<input type="text" placeholder="" readonly="ture" id='showUserPicker'>
+						<div class="puts_emalis" id="userResult" ></div>
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">出生日期</label>
+					<div class="input-box">
+						<input type="text" placeholder="" readonly="ture" id="showDatePicker3">
+						<div class="puts_emalis" id="dateResult3" ></div>
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">期待工作地</label>
+					<div class="input-box">
+						<input type="text" placeholder="" readonly="ture" id='showCityPicker3'>
+						<div class="puts_emalis" id="cityResult3" ></div>
+					</div>
+				</li class="jt-cl">
+				<li class="jt-cl">
+					<label for="">学历</label>
+					<div class="input-box">
+						<input type="text" placeholder="" readonly="ture" id="showXuliPicker">
+						<div class="puts_emalis" id="xuliResult" ></div>
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">工作年限</label>
+					<div class="input-box">
+						<input type="text" placeholder="" readonly="ture" id="showyearPicker">
+						<div class="puts_emalis" id="yearResult" ></div>
+					</div>
+				</li>
+				<li>
+					<label for="">手机</label>
+					<div class="input-box">
+						<input type="tel" placeholder="必填">
+					</div>
+				</li>
+				<li>
+					<label for="">验证码</label>
+					<div class="input-boxs">
+						<input type="text" placeholder="输入验证码">
+						<button type="button">获取验证码</button>
+					</div>
+				</li>
+			</ul>
+		</form>
+		<p>提示：您所填写的信息，会更新到您的简历中哦！</p>
+	</div>
+	<div class="hui-line"></div>
+	<div class="inter">
+		<h2>你可能感兴趣的职位</h2>
+		<p class="ganbu">业务储备干部</p>
+		<p class="address"><span>湖北省/武汉市</span><span>武汉企秀科技有限公司</span></p>
+		<p class="price">30000~50000/月</p>
+		<small>2017-10-11</small>
+	</div>
+	<div class="hui-line"></div>
+</div>
+
+<div class="footer-fixed">
+	<div class="share"><a class="text-c" href="javascript:void(0);"><i class="scd-share"></i>分享</a>
+	</div>
+	<div class="scd-reserve">
+		<div class="foot-apply-interv">
+			<button type="button" class="interv-but" ><i></i>申请面试</button>
+		</div>
+	</div>
+</div>
+</body>
+<script src="js/mui.min.js"></script>
+<script src="js/mui.picker.js"></script>
+<script src="js/mui.picker.all.js"></script>
+<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/date.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    // 性别
+    (function($, doc) {
+		$.init();
+		$.ready(function() {
+			//性别
+			var userPicker = new $.PopPicker();
+			userPicker.setData([
+	
+			 {
+				
+				text: '男'
+			}, {
+				
+				text: '女'
+			}]);
+			var showUserPickerButton = doc.getElementById('showUserPicker');
+			var userResult = doc.getElementById('userResult');
+			showUserPickerButton.addEventListener('tap', function(event) {
+				userPicker.show(function(items) {
+					userResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//学历
+			var userPicker1 = new $.PopPicker();
+			userPicker1.setData([
+	
+			 {
+				text: '高中'
+			},
+			 {
+				text: '中专'
+			},
+			 {
+				text: '大专'
+			},
+			 {
+				text: '本科'
+			},
+			{
+				text: '硕士'
+			},
+			 {
+				text: '博士'
+			}]);
+			var showXuliPickerButton = doc.getElementById('showXuliPicker');
+			var xuliResult = doc.getElementById('xuliResult');
+			showXuliPickerButton.addEventListener('tap', function(event) {
+				userPicker1.show(function(items) {
+					xuliResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+
+			//工作经验
+			var userPicker2 = new $.PopPicker();
+			userPicker2.setData([
+	
+			 {
+				text: '无经验'
+			},
+			 {
+				text: '一年以下'
+			},
+			 {
+				text: '1-2年'
+			},
+			 {
+				text: '2-3年'
+			},
+			{
+				text: '3-5年'
+			},
+			 {
+				text: '5年以上'
+			}]);
+			var showyearPickerButton = doc.getElementById('showyearPicker');
+			var yearResult = doc.getElementById('yearResult');
+			showyearPickerButton.addEventListener('tap', function(event) {
+				userPicker2.show(function(items) {
+					yearResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//三轴联动
+				var cityPicker3 = new $.PopPicker({
+					layer: 3
+				});
+				cityPicker3.setData(cityData3);
+				var showCityPickerButton = doc.getElementById('showCityPicker3');
+				var cityResult3 = doc.getElementById('cityResult3');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker3.show(function(items) {
+						cityResult3.innerText =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			//日期
+				
+				var dtpicker = new mui.DtPicker({  
+				    type: "date",//设置日历初始视图模式  
+				    beginDate: new Date(2015, 04, 25),//设置开始日期  
+				    endDate: new Date(2016, 04, 25),//设置结束日期  
+				    labels: ['年', '月', '日', '时', '分'],//设置默认标签区域提示语  
+				    customData: {  
+				        h: [{  
+				            value: 'AM',  
+				            text: 'AM'  
+				        }, {  
+				            value: 'PM',  
+				            text: 'PM'  
+				        }]  
+				    }//时间/日期别名  
+				})  
+ 
+				var showDatePickerButton = doc.getElementById('showDatePicker3');
+				var dateResult3 = doc.getElementById('dateResult3');
+				showDatePickerButton.addEventListener('tap', function(event) {
+					dtpicker.show(function(items) {
+						dateResult3.innerText =  items.y.text + '-' + items.m.text + '-' + items.d.text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})
+	(mui, document);
+   
+</script>
+</html>

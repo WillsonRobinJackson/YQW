@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>招聘网</title>
+<meta name="keywords" content="招聘,找工作,求职,武汉招聘,武汉人才,职介招聘平台"/>
+<meta name="description" content="招聘网是最专业的职介招聘求职网站,提供武汉最新最全真实招聘信息，找工作，招聘人才就上优青网。"/>
+<meta name="author" content="招聘网"/>
+<meta name="copyright" content="www.uqinger.com"/>
+<if condition="$apply['Subsite']">
+	<base href="{:C('SUBSITE_DOMAIN')}"/>
+</if>
+<link rel="shortcut icon" href="{:C('qscms_site_dir')}favicon.ico"/>
+<script src="__HOMEPUBLIC__/js/jquery.min.js"></script>
+<script type="text/javascript">
+	var app_spell = "<?php echo APP_SPELL;?>";
+	var qscms = {
+		base : "{:C('SUBSITE_DOMAIN')}",
+		keyUrlencode:"{:C('qscms_key_urlencode')}",
+		domain : "http://{$_SERVER['HTTP_HOST']}",
+		root : "__ROOT__/index.php",
+		companyRepeat:"{:C('qscms_company_repeat')}",
+		is_subsite : <if condition="$apply['Subsite'] and C('SUBSITE_VAL.s_id') gt 0">1<else/>0</if>,
+		subsite_level : "{:C('SUBSITE_VAL.s_level')}",
+		smsTatus: "{:C('qscms_sms_open')}"
+	};
+	$(function(){
+		$.getJSON("{:U('Home/AjaxCommon/get_header_min')}",function(result){
+			if(result.status == 1){
+				$('#J_header').html(result.data.html);
+			}
+		});
+	})
+</script>
+{$synlogin}
+        
+        
+        
+        

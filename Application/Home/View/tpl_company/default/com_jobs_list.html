@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<qscms:company_show 列表名="info" 企业id="$_GET['id']"/>
+	<include file="public:meta" />
+	<link href="../public/css/common.css" rel="stylesheet" type="text/css" />
+	<link href="../public/css/common_ajax_dialog.css" rel="stylesheet" type="text/css" />
+	<link href="__COMPANY__/default/css/jobs.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={:C('qscms_map_ak')}"></script>
+<!--	<script src="../default/public/js/jquery.common.js" type="text/javascript" language="javascript"></script> -->
+</head>
+<body>
+<include file="public:header" />
+<div class="comshow">
+  <div class="comlogo">
+    <img src="{$info['logo']}">
+  </div>
+	 
+ <div class="cominfo">
+		<div class="cname">
+		{$info['companyname']}
+		<if condition="$info['audit'] eq 1"><img src="{:attach('auth.png','resource')}" title="认证企业"></if>
+		<if condition="$info['setmeal_id'] gt 1"><img src="{:attach($info['setmeal_id'].'.png','setmeal_img')}" title="{$info.setmeal_name}"></if>
+		<if condition="$info['famous'] eq 1">
+			<img src="<if condition="C('qscms_famous_company_img') eq ''">{:attach('famous.png','resource')}<else/>{:attach(C('qscms_famous_company_img'),'images')}</if>" title="诚聘通企业"/>
+		</if>
+		</div>
+		<div class="txt">{$info['district_cn']}<span>&nbsp;</span>{$info['nature_cn']}<span>&nbsp;</span>{$info['trade_cn']}<span>&nbsp;</span>{$info['registered']}{$info['currency']}<span>&nbsp;</span>{$info['scale_cn']}</div>
+        <div class="stat">
+		  <div class="li">
+		    <div class="t">{$info['jobs_count']}个</div>
+			招聘职位
+		  </div>
+		 <div class="li">
+		    <div class="t">{$info['reply_ratio']}%</div>
+			简历及时处理率
+		  </div>
+		  <div class="li">
+		    <div class="t">{$info['reply_time']}</div>
+			简历处理用时
+		  </div>
+		  <div class="li">
+		    <div class="t">{$info['last_login_time']}</div>
+			企业最近登录
+		  </div>
+		   <div class="clear"></div>
+		</div>
+		
+		<div class="share bdsharebuttonbox" data-tag="share_1">
+			<a class="li s1 bds_tsina" data-cmd="tsina"></a>
+			<a class="li s2 bds_renren" data-cmd="renren"></a>
+			<a class="li s3 bds_qzone" data-cmd="qzone"></a>
+			<a class="li s5 bds_sqq" data-cmd="sqq"></a>
+			<a class="li s6 bds_weixin" data-cmd="weixin"></a>
+			<div class="clear"></div>
+		</div>
+		
+        <div class="attention">
+		  	<div class="abtn <eq name="info['focus']" value="1">for_cancel<else /></eq>"><eq name="info['focus']" value="1">取消关注<else />关注</eq></div>
+		    <div class="fans">粉丝：<span><strong>{$info['fans']}</strong></span></div>
+			<div class="clear"></div>
+        </div>
+		
+		
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div class="comshowmain">
+
+  <div class="l">
+	<div class="comnav">
+	 	 <a href="{:url_rewrite('QS_companyshow',array('id'=>$info['id']))}">公司主页</a>
+		  <a href="{:url_rewrite('QS_companyjobs',array('id'=>$info['id']))}" class="select" >在招职位<span>({$info['jobs_count']})</span></a>
+		  <div class="clear"></div>
+	</div>
+	
+	<qscms:jobs_list 列表名="jobs" 会员uid="$info['uid']" 显示数目="3"/>
+	<div class="infobox link_blue">
+      <notempty name="jobs['list']">
+      	<div class="ajax-list">
+		<volist name="jobs['list']" id="vo">
+          <div class="jobslist J_jobsList" data-jid="{$vo['id']}">
+            <div class="jname"><a target="_blank" href="{$vo['jobs_url']}"><strong>{$vo['jobs_name']}</strong></a> <span>[{$vo['amount']}人]</span><span>{$vo['nature_cn']}</span><span><u>{$vo['refreshtime_cn']}</u></span></div>
+            <div class="jtxt"><u>{$vo['wage_cn']}</u><span>|</span>{$vo['district_cn']}<span>|</span>{$vo['experience_cn']}<span>|</span>{$vo['education_cn']}</div>
+            <div class="jobapp J_applyForJob" data-batch="false" data-url="{:U('AjaxPersonal/resume_apply')}">投递简历</div>
+          </div>
+          </volist>
+      	</div>
+        <div class="j-more jobs-more" p="2">查看更多</div>
+      <else />
+          <div class="list_empty_group">
+              <div class="list_empty">
+                  <div class="list_empty_left"></div>
+                  <div class="list_empty_right">
+                      <div class="sorry_box">不凑巧，目前该公司暂无招聘中的职位！</div>
+                      <div class="stips_box">我们建议您先点击关注该公司，及时获取招聘动态</div>
+                  </div>
+                  <div class="clear"></div>
+              </div>
+          </div>
+      </notempty>
+    </div>
+	
+  </div>
+  <!-- -->
+  <div class="r">
+  
+    <div class="contact link_gray6">
+	  <div class="t">联系方式<if condition="$info['hide']"><div class="t_check link_blue"><a class="J_check_truenum" href="javascript:;">登录后查看</a></div></if></div>
+	  <if condition="$info['website']">
+      <div class="txt">
+      	<div class="fl txt_t">网址</div>
+      	<div class="fl content_c"><a target="_blank" href="{$info['website']}">{$info['website_']}</a></div>
+      	<div class="clear"></div>
+      </div>
+      </if>
+      <if condition="$info['telephone']">
+	 	 <div class="txt">
+	 	 	<div class="fl txt_t">手机</div>
+	 	 	<div class="fl">{$info['telephone']}</div>
+	 	 	<div class="clear"></div>
+	 	 </div>
+	 	</if>
+	 	<if condition="$info['landline_tel']">
+	    <div class="txt">
+	    	<div class="fl txt_t">固话</div>
+	    	<div class="fl">{$info['landline_tel']}</div>
+	    	<div class="clear"></div>
+	    </div>
+	    </if>
+		 <div class="txt">
+		 	<div class="fl txt_t">邮箱</div>
+		 	<div class="line_substring">{$info['email']}</div>
+		 	<div class="clear"></div>
+		 </div>
+		 <if condition="$info['qq']">
+	    <div class="txt">
+	    	<div class="fl txt_t">QQ</div>
+	    	<div class="fl"><a class="img_cell" target="blank" href="tencent://message/?uin={$info['qq']}&Site=menu&Menu=yes"><img border="0" SRC=http://wpa.qq.com/pa?p=1:{$info['qq']}:1 alt="点击这里给我发消息"></a></div>
+	    	<div class="clear"></div>
+	    </div>
+	    </if>
+		  <div class="txt">
+		  	<div class="fl txt_t">地址</div>
+		  	<div class="fl content_c" title="{$info['address']}">{$info['address']}</div>
+		  	<div class="clear"></div>
+		  </div>
+		  <if condition="$info['map_x'] && $info['map_y'] && $info['map_zoom']">
+          <div class="map" id="map"></div>
+			<script type="text/javascript">
+				var map = new BMap.Map("map");       // 创建地图实例  
+				var point = new BMap.Point({$info['map_x']},{$info['map_y']});  // 创建点坐标   
+				map.centerAndZoom(point, {$info['map_zoom']});
+				var qs_marker = new BMap.Marker(point);        // 创建标注   
+				map.addOverlay(qs_marker);  
+				map.setCenter(point); 
+			</script>
+          </if>
+    </div>
+	<if condition="$info['famous'] eq 1">
+  		<div class="famousWrap">
+  			<img src="{:attach('famous_img.png','resource')}" title="诚聘通企业">
+  		</div>
+  	</if>
+	<qscms:company_list 列表名="similar" 行业="$info['trade']" 显示数目="5" 去除id="$_GET['id']"/>
+	<if condition="$similar['list']">
+	<div class="same link_gray6">
+	  <div class="t">看过此公司的人还看过</div>
+      <volist name="similar['list']" id="vo"> 
+      <div class="list link_gray6">
+	  		<div class="pic"><a target="_blank" href="{$vo['url']}"><img src="{$vo['logo']}" /></a></div>
+			<div class="txt">
+			  	<div class="comname"><a href="{$vo['url']}" target="_blank">{$vo['companyname']}</a></div>
+			    <div class="count"><a target="_blank" href="{:url_rewrite('QS_companyjobs',array('id'=>$vo['id']))}"><span>{$vo['jobs_count']}</span></a>个招聘职位</div>
+			</div>
+			<div class="clear"></div>
+	  </div>
+	  </volist>
+	</div>
+	</if>
+	
+  </div>
+  <div class="clear"></div>
+</div>
+<include file="Home@default/public/footer_min" />
+<script type="text/javascript" src="../public/js/jquery.modal.dialog.js"></script>
+<script src="http://static.geetest.com/static/tools/gt.js"></script>
+<script type="text/javascript">
+	window._bd_share_config = {
+		common : {
+			bdText : "{$info['companyname']}-{:C('qscms_site_name')}",	
+			bdDesc : "{$info['companyname']}-{:C('qscms_site_name')}",	
+			bdUrl : "<if condition="!$apply['Subsite']">{:C('qscms_site_domain')}</if>{:url_rewrite('QS_companyshow',array('id'=>$info['id']))}", 	
+			bdPic : "{:C('qscms_site_domain')}{$info['logo']}"
+		},
+		share : [{
+			"tag" : "share_1",
+			"bdCustomStyle":"__COMPANY__/default/css/jobs.css"
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+	$(document).ready(function(){
+		$.getJSON("{:U('ajaxCommon/company_statistics_add')}",{comid:"{$info['id']}"});
+		var isVisitor = "{$visitor['uid']}";
+		// 关注
+		$(".abtn").die().live('click',function(){
+			var url = "{:U('ajaxPersonal/company_focus')}";
+			var company_id = "{$info['id']}";
+			var thisObj = $(this);
+			if ((isVisitor > 0)) {
+				$.getJSON(url,{company_id:company_id},function(result){
+					if(result.status==1){
+						disapperTooltip('success',result.msg);
+						thisObj.html(result.data.html).toggleClass('for_cancel');
+						if(result.data.op==1){
+							$(".fans_num").html(parseInt($(".fans_num").html())+1);
+						}else{
+							$(".fans_num").html(parseInt($(".fans_num").html())-1);
+						}
+					} else {
+						disapperTooltip('remind',result.msg);
+					}
+				});
+			} else {
+				var qsDialog = $(this).dialog({
+		    		loading: true,
+					footer: false,
+					header: false,
+					border: false,
+					backdrop: false
+				});
+				var loginUrl = "{:U('AjaxCommon/get_login_dig')}";
+				$.getJSON(loginUrl, function(result){
+		            if(result.status==1){
+		            	qsDialog.hide();
+	            		var qsDialogSon = $(this).dialog({
+	            			title: '会员登录',
+	            			content: result.data.html,
+							footer: false,
+							border: false
+						});
+		    			qsDialogSon.setInnerPadding(false);
+		            } else {
+		            	qsDialog.hide();
+			            disapperTooltip('remind',result.msg);
+		            }
+		        });
+			}
+		});
+
+		// 查看联系方式
+		$('.J_check_truenum').die().live('click', function() {
+			if (!(isVisitor > 0)) {
+				var qsDialog = $(this).dialog({
+		    		loading: true,
+					footer: false,
+					header: false,
+					border: false,
+					backdrop: false
+				});
+				var loginUrl = "{:U('AjaxCommon/get_login_dig')}";
+				$.getJSON(loginUrl, function(result){
+		            if(result.status==1){
+		            	qsDialog.hide();
+	            		var qsDialogSon = $(this).dialog({
+	            			title: '会员登录',
+	            			content: result.data.html,
+							footer: false,
+							border: false
+						});
+		    			qsDialogSon.setInnerPadding(false);
+		            } else {
+		            	qsDialog.hide();
+			            disapperTooltip('remind',result.msg);
+		            }
+		        });
+			}
+		});
+		$('.jobs-more').die().live('click',function(){
+			$(this).html('加载中...');
+			var p = $(this).attr('p');
+			$.getJSON("{:U('AjaxCommon/get_com_jobs')}",{p:p,uid:"{$info['uid']}"},function(result){
+				if(!result.data.isfull){
+					$('.jobs-more').html('查看更多');
+					var html = '';
+					$.each(result.data.list, function(i, r){
+						html += '<div class="jobslist J_jobsList" data-jid="'+r.id+'">';
+						html += '<div class="jname">';
+						html += '<a target="_blank" href="'+r.jobs_url+'"><strong>'+r.jobs_name+'</strong></a>';
+						html += '<span>['+r.amount+'人]</span><span>'+r.nature_cn+'</span><span><u>'+r.refreshtime_cn+'</u></span></div>';
+						html += '<div class="jtxt"><u>'+r.wage_cn+'</u><span>|</span>'+r.district_cn+'<span>|</span>'+r.experience_cn+'<span>|</span>'+r.education_cn+'</div>';
+						html += '<div class="jobapp J_applyForJob" data-batch="false" data-url="{:U(\'AjaxPersonal/resume_apply\')}">投递简历</div></div>';
+					});
+					$('.ajax-list').append(html);
+					$('.jobs-more').attr('p',parseInt($('.jobs-more').attr('p'))+1);
+
+				}else{
+					$('.jobs-more').html('没有更多职位了');
+					$('.j-more').removeClass('jobs-more');
+				}
+			});
+		});
+        // 申请职位
+        $('.J_applyForJob').die().live('click', function(){
+            var url = $(this).data('url');
+            var jidValue = $(this).closest('.J_jobsList').data('jid');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: {jid: jidValue}
+            }).done(function(data) {
+                if (parseInt(data.status)) {
+                    if(data.data.html){
+                        $(this).dialog({
+                            title: '申请职位',
+                            border: false,
+                            content:data.data.html
+                        });
+                    } else {
+                        disapperTooltip('success', successMsg);
+                    }
+                }
+                else if(data.data==1){
+                    location.href=qscms.root+"?m=Home&c=Personal&a=resume_add";
+                } else {
+                    if (eval(data.dialog)) {
+                        var qsDialog = $(this).dialog({
+                            loading: true,
+                            footer: false,
+                            header: false,
+                            border: false,
+                            backdrop: false
+                        });
+                        if (eval(qscms.smsTatus)) { // 是否开启短信
+                            var creatsUrl = qscms.root + '?m=Home&c=AjaxPersonal&a=resume_add_dig';
+                            $.getJSON(creatsUrl,{jid:jidValue}, function(data1){
+                                if(data1.status==1){
+                                    qsDialog.hide();
+                                    var qsDialogSon = $(this).dialog({
+                                        content: data1.data.html,
+                                        footer: false,
+                                        header: false,
+                                        border: false
+                                    });
+                                    qsDialogSon.setInnerPadding(false);
+                                } else {
+                                    qsDialog.hide();
+                                    disapperTooltip("remind", data1.msg);
+                                }
+                            });
+                        } else {
+                            var loginUrl = qscms.root + '?m=Home&c=AjaxCommon&a=get_login_dig';
+                            $.getJSON(loginUrl, function(data1){
+                                if(data1.status==1){
+                                    qsDialog.hide();
+                                    var qsDialogSon = $(this).dialog({
+                                        title: '会员登录',
+                                        content: data1.data.html,
+                                        footer: false,
+                                        border: false
+                                    });
+                                    qsDialogSon.setInnerPadding(false);
+                                } else {
+                                    qsDialog.hide();
+                                    disapperTooltip("remind", data1.msg);
+                                }
+                            });
+                        }
+                    } else {
+                        disapperTooltip("remind", data.msg);
+                    }
+                }
+            })
+        });
+	});
+</script>
+</body>
+</html>

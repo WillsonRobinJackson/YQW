@@ -1,0 +1,380 @@
+html{
+	max-width: 750px;
+	margin: 0 auto;
+	background: #fafafa;
+}
+body{
+	max-width: 750px;
+	margin: 0 auto;
+}
+/*申请成功后－推荐职位*/
+.apply-sus-body{
+	padding: 10px 0;
+}
+.apply-sus-body .apls-box{
+	margin: 0 10px;
+} 
+
+@media screen and (min-width:750px){
+	body{
+		max-width: 750px;
+		/*box-shadow: 0 0px 1px 1px #eff3f6;*/
+	}
+	.filter-fix,.zl-entry-fix,.resume-gide,.imp-res-log,.footer,.mask,.AMAP-result,.conform-bac,.wl-add,.foot-fix,.ul-bottom,.bot-fixed,.sr-wkpla-box
+	,.sr-wkplb,.share-mask,.more-post,.zw-expired-text,.dload-guide,.share-wrapper,.live-footer,.live-mask,.hbyq-share,.envelope-mask,.more-post.fixed{
+		width: 750px;
+		max-width: 750px;
+		left: auto;
+	}
+	.mask,.ul-bottom,.sr-wkpla-box,.envelope-mask{
+		right: auto;
+	}
+	
+	/*去完善简历的好处*/
+	.mr-ws-sty a img{
+		width: 390px;
+		left: 50%;
+		margin-left: -195px;
+	}
+	
+	.nloginbox{
+		width: 750px;
+		left: 50%;
+		margin-left: -375px;
+	}
+	
+	
+	/*咨询按钮*/
+	.zx-fix{
+		left: 50%;
+		right: auto;
+		margin-left: 306px;
+	}
+	
+	/*回到底部按钮*/
+	.pos-top{
+		right: 0;
+		left: 50%;
+		margin-left: 322px;
+	}
+	
+	/*sem 分享按钮*/
+	.sem-share{
+		left: 50%;
+		right: auto;
+		margin-left: 321px;
+	}
+	/*企业举报按钮*/
+	.jb-icon{
+		right: auto;
+		left: 50%;
+		margin-left: 317px;
+	}
+	
+	
+	
+	/*but-popularize-page*/
+	.bpp-body .but-sty{
+		width: 612px;
+	}
+	.bpp-body .but-sty a{
+		width: 296px;
+		height: 90px;
+		line-height: 90px;
+		font-size: 34px;
+		border-radius: 5px;
+	}
+	
+	
+	/*招募直营快车*/
+	.sr-footer .srf-bg{
+		padding: 0 90px;
+		box-sizing: border-box;
+	}
+	.sr-footer .reserve-inp{
+		width: 100%;
+		padding-bottom: 42px;
+		font-size: 30px;
+	}
+	.sr-footer .reserve-inp .text{
+		height: 80px;
+		padding-right: 10px;
+		margin-bottom: 20px;
+		font-size: 30px;
+	}
+	
+	.sr-footer .reserve-inp .text.ss-text{
+		margin-bottom: 30px;
+	}
+	.sr-footer .reserve-inp .text input{
+		height: 38px;
+		line-height:38px;
+		font-size: 30px;
+		margin-left: 23px;
+		margin-top: 22px;
+		margin-bottom: 20px;
+	}
+	.sr-footer .reserve-inp .text input:-ms-input-placeholder{
+		height: 38px;
+		line-height: 38px;
+		font-size: 30px;
+	}
+	.sr-footer .reserve-inp .text input::-moz-placeholder{
+		height: 38px;
+		line-height: 38px;
+		font-size: 30px;
+	}
+	.sr-footer .reserve-inp .text input:-moz-placeholder{
+		height: 38px;
+		line-height: 38px;
+		font-size: 30px;
+	}
+	.sr-footer .reserve-inp .text input::-webkit-input-placeholder{
+		height: 38px;
+		line-height: 38px;
+		font-size: 30px;
+	}
+	.sr-footer .reserve-inp .text span.get-pw, .sr-footer .reserve-inp .text span.pw-count{
+		padding: 0px 16px 0 28px;
+		height: 38px;
+		line-height: 38px;
+		font-size: 30px;
+		margin-top: 22px;
+		margin-bottom: 14px;
+	}
+	.sr-footer .reserve-inp .reserve-but{
+		height: 90px;
+		line-height: 90px;
+		margin-top: 45px;
+		font-size: 42px;
+		border-radius: 7px;
+	}
+	/*直播*/
+	.live-footer,.live-mask,.live-share,.vedio-wrapper{
+		width: 750px;
+		max-width: 750px;
+		left: auto;
+	}	
+	body.live-bg{ width: 750px; margin: 0 auto;}
+	
+	/*热文*/
+	.hotesy-share .hotesy-top,.live-top,.video-bgimg,.video-bgmask{ max-width: 750px; left: auto;}
+	.video-bgimg{ right: auto;}
+	
+	/*录播*/
+	.report-footer{ max-width: 750px; left: auto;}
+	
+}
+/*
+@-moz-document url-prefix(){ 
+	.dload-guide{ position: sticky;}
+}*/
+
+
+/*04*/
+.scd-head.bort{
+	border-bottom:1px solid #c0c4c4;
+}
+.scd-h-data.borb,.scb-ul-sty .borb,.scb-cpt-ul .borb{
+	border-bottom:1px solid #ebeff2;
+}
+.scd-div.borb{
+	border-bottom:1px solid #c0c4c4;
+}
+/*22*/
+.main-links .borb,.jo-input.borb,.exp-rd-tit.borb,.ci-head .borb{
+	border-bottom: 1px solid #ebebeb;
+}
+
+/*25*/
+.ms-head .borb,.ms-degree .borb,.ms-workexperience .borb,.mys-box .jo-inputs .borb{
+	border-bottom: 1px solid #ebebeb;
+}
+/*34*/
+.cf-b-buttontwo.bort,.cf-b-buttontwo.bort{
+	border-top: 1px solid #ccc;
+	background-image: none;
+}
+/*41*/
+.mys-box h2.myb-h span.borl{
+	border-left: 1px solid #ebebeb;
+}
+
+/*45*/
+.progress-line .prgl-deal .report-ico:before{
+	transform: scaleX(1);
+}
+
+/*81*/
+.sds-bot li{
+	box-sizing: border-box;
+}
+
+
+
+/*定制职位*/
+.jo-input.ml80{
+	margin-left:0 ;
+}
+
+
+@-moz-document url-prefix(){
+	
+	.hd-s-search{
+		margin-bottom: 8px;
+	} 
+	/*职位定制*/
+	.jo-input, .jo-inputs .rd-title{
+		width: 100%;
+	}
+	
+	/*职位列表－去完善*/
+	.resume-gide p{
+		float: left;
+	}
+	.resume-gide a.ws-but{
+		float: right;
+	}
+	
+	/*22*/
+	.main-top .main-resume .imp-res{
+		float: right;
+	}
+	
+	/*footer*/
+	.footer a{
+		width: 25%;
+		float: left;
+	}
+	
+	/*职位详情－预约面试*/
+	.footer .foot-func-ico{
+		float: left;
+		background-color: #fff;
+	}
+	
+	/*filter弹框*/
+	.sr-wkpla-box .srk-a .place,.sr-wkpla-box .srk-a .seq,.sr-wkpla-box .srk-a .ms-time{
+		width: 24%;
+		float: left;
+	}
+	
+	/*45*/
+	.progress-line .prgl-t-tit,.progress .prg-box .prgb-top{
+		width: 100%;
+		box-sizing: border-box;
+	}
+	
+	/*86*/
+	.myresume .footer span.scd-reserve{
+		width: 72.5%;
+		float: right;
+	}
+	
+	/*97*/
+	.resultdone .rd-title span.flr,.rd-title a.rnd-right{
+		display: block;
+	}
+	.joborder .jo-input .jb-getcode{
+		margin-bottom: 10px;
+	}
+	
+	/*sem*/
+	.sem-footer .reserve-inp .text span.get-pw{
+		margin-bottom: 16px;
+	}
+}
+
+/*选择面试时间*/
+.select-multim li.cur.borradius:before{
+	border: 2px solid #f04d52;
+}
+
+.rd-title{
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.rd-title .flr, .jo-input .flr {float: none;}
+.rd-t-left{
+	display: block;
+	min-width:80px;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+	box-flex:1;
+	white-space: nowrap;
+}
+.jo-input,.jo-inputs .rd-title{
+	display: box;
+	width: 100%;
+}
+.jo-input .ml80{
+	width: auto;
+}
+.jo-input input,.jo-inputs .rd-title a.select{
+	width: 2000px;
+	height: 20px;
+	line-height: 20px;
+	padding-top: 12px;
+	padding-bottom: 11px;
+	margin-top: 0;
+}
+.ms-degree .rd-title,.ms-workexperience .rd-title{
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*APP直播分享后*/
+.living{ margin-top: 0;}
+
+
+
+
+.bortb{ border-top:1px solid #c6cacc; border-bottom:1px solid #c6cacc; background-image: none;}
+.bortb-dfe{border-top:1px solid #dfe3e6;  border-bottom:1px solid #dfe3e6;  background-image: none;}
+.bortb-df{border-top:1px solid #dfdfdf;  border-bottom:1px solid #dfdfdf;  background-image: none;}
+.bortb-e8c{border-top: 1px solid #e8ce88; border-bottom: 1px solid #e8ce88; background-image: none;}
+.bortb-ebe{border-top:1px solid #ebeff2; border-bottom:1px solid #ebeff2; background-image: none;}
+.borb{border-bottom: 1px solid  #c6cacc; background-image: none;}
+.borbf{border-bottom: 1px solid  #fff; background-image: none;}
+.borbc{border-bottom: 1px solid  #ccc; background-image: none;}
+.borb-df{border-bottom: 1px solid  #dfdfdf; background-image: none;}
+.borb-d7{border-bottom: 1px solid #d7d7d7; background-image: none;}
+.borb-d7c{border-bottom: 1px solid #d7cb61; background-image: none;}
+.borb-fdc{border-bottom: 1px solid #fffdc6; background-image: none;}
+.borb-d0d{border-bottom: 1px solid #d0d3d4; background-image: none;}
+.borb-dfe{border-bottom: 1px solid #dfe3e6; background-image: none;}
+.borb-ebe{border-bottom: 1px solid #ebeff2; background-image: none;}
+.borb-e6e8{border-bottom: 1px solid #e6e6e8; background-image: none;}
+.bort{border-top: 1px solid #c6cacc; background-image: none;}
+.bortc{border-top: 1px solid #ccc; background-image: none;}
+.bort-d0d{border-top: 1px solid #d0d3d4; background-image: none;}
+.bort-ebe{border-top: 1px solid #ebeff2; background-image: none;}
+.bort-ab{border-top: 1px solid #c6cacc; background-image: none;}
+.bort-dfe{border-top: 1px solid #dfe3e6; background-image: none;}
+.borb-f3e{border-bottom: 1px solid #f3e3b1; background-image: none;}
+.borl{ border-left: 1px solid #c6cacc; background-image: none;}
+.borl-e6e8{border-left: 1px solid #e6e6e8; background-image: none;}
+.borl-e6{border-left: 1px solid #e6e6e6; background-image: none;}
+.borl-ab{ border-left: 1px solid #ababab; background-image: none;}
+.borl-d0d{ border-left: 1px solid #d0d3d4; background-image: none;}
+.borl-ebe{ border-left: 1px solid #ebeff2; background-image: none;}
+.borl-dfe{ border-left: 1px solid #dfe3e6; background-image: none;}
+.borl-dc{ border-left: 1px solid #dcdcdc; background-image: none;}
+.borl-c{ border-left: 1px solid #ccc; background-image: none;}
+.borr{ border-right: 1px solid #c6cacc; background-image: none;}
+.borr-c{ border-right: 1px solid #ccc; background-image: none;}
+.borr-dfe{ border-right: 1px solid #dfe3e6; background-image: none;}
+.mysxclu-factor span{ border-right: 1px solid #d0d3d4; background-image: none;}
+.borradius:before{content: "";width: 200%;height: 200%;position: absolute;top: 0;left: 0;border: 2px solid #e0e0e0;-webkit-transform: scale(0.5);-webkit-transform-origin: 0 0;padding: 1px;box-sizing: border-box; border-radius: 8px; -webkit-box-sizing: border-box;}
+
+

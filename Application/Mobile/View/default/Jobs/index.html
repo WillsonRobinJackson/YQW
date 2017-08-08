@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <include file="public:meta" />
+    <link rel="stylesheet" href="../public/css/jobs.css">
+<qscms:load type="category" search="1"/>
+</head>
+<body>
+<include file="public:header" />
+<div class="split-block-title" style=" margin-top:1.9rem;">
+    <div class="sbox js-show-qspageso">
+	    {$Think.get.key|default="请输入职位名/公司名关键字"|urldecode|urldecode}
+	    <script>
+		    // 显示搜索层
+		    $('.js-show-qspageso').on('click', function(){
+			    $('.qspageso').toggle();
+		    });
+	    </script>
+    </div>
+</div>
+
+<qscms:classify 列表名="jobs_cate_info" 类型="QS_jobs_info"/>
+<qscms:classify 列表名="wage_list" 类型="QS_wage" 显示数目="100"/>
+<qscms:classify 列表名="experience_list" 类型="QS_experience" 显示数目="100"/>
+<qscms:classify 列表名="nature_list" 类型="QS_jobs_nature" 显示数目="100"/>
+<qscms:classify 列表名="education_list" 类型="QS_education" 显示数目="100"/>
+<qscms:classify 列表名="tag_list" 类型="QS_jobtag" 显示数目="100"/>
+<qscms:classify 列表名="trade_list" 类型="QS_trade" 显示数目="100"/>
+<qscms:classify 列表名="city" 类型="QS_citycategory" 地区分类="$_GET['citycategory']" 显示数目="100"/>
+
+
+<div class="filter-group x4 filter-outer">
+    <div id="f-mask"></div>
+    <div class="filter-outer" style="font-size: 0.25rem;">
+        <div class="filter-list js-filter qs-temp" data-tag="0" data-type="city" data-base="QS_city_parent" data-source="QS_city" data-multiple="false" data-num="3" data-link="true" data-range="true" data-level="{:C('qscms_category_district_level')}"><div class="filter-cell"><div class="filter-cell-txt qs-temp-txt-city">{$city['select']['categoryname']|default="职位类型"}</div></div></div>
+        <div class="filter-list js-filter" data-tag="1"><div class="filter-cell"><div class="filter-cell-txt f-normal-txt-wage">{$wage_list[$_GET['wage']]|default="上班地点"}</div></div></div>
+        <div class="filter-list js-filter" data-tag="2"><div class="filter-cell"><div class="filter-cell-txt f-normal-txt-exp">{$experience_list[$_GET['experience']]|default="面试时间"}</div></div></div>
+        <div class="filter-list js-filter" data-tag="3"><div class="filter-cell"><div class="filter-cell-txt">排序</div></div></div>
+      <div class="clear"></div>
+      <div class="qs-actionmore"></div>
+
+	    <form id="searchForm" style="font-size: 0.25rem;">
+		    <input type="hidden" class="" name="key" value="{$Think.get.key|urldecode|urldecode}">
+		    <input type="hidden" class="qs-recover-code-job" name="jobcategory" value="{$Think.get.jobcategory}">
+		    <input type="hidden" class="qs-temp-code-city" name="citycategory" value="{$Think.get.citycategory}">
+		    <input type="hidden" class="f-normal-code-wage" name="wage" value="{$Think.get.wage}">
+		    <input type="hidden" class="f-normal-code-exp" name="experience" value="{$Think.get.experience}">
+		    <input type="hidden" class="f-more-l-code-nature" name="nature" value="{$Think.get.nature}">
+		    <input type="hidden" class="f-more-l-code-edu" name="education" value="{$Think.get.education}">
+		    <input type="hidden" class="f-more-l-code-tag" name="jobtag" value="{$Think.get.jobtag}">
+		    <input type="hidden" class="f-more-l-code-trade" name="trade" value="{$Think.get.trade}">
+		    <input type="hidden" class="f-more-l-code-settr" name="settr" value="{$Think.get.settr}">
+		    <input type="hidden" class="f-deliver" name="deliver" value="{$Think.get.deliver}">
+		    <input type="hidden" class="qs-temp-code-range" name="range" value="{$Think.get.range}">
+	    </form>
+	    <input type="hidden" class="f-seach-page" value="?m=Mobile&c=Jobs&a=index&">
+    </div>
+
+
+    <div class="con-filter">
+        <div class="f-box f-box-city"></div>
+		    <div class="f-box f-box-wage">
+			    <div class="f-box-inner">
+				    <li><a class="f-item f-item-normal <if condition="$Think.get.wage eq 0">select</if>" href="javascript:;" data-type="wage" data-code="0" data-title="不限">不限</a></li>
+            <volist name="wage_list" id="wage">
+                    <li><a class="f-item f-item-normal<if condition="$Think.get.wage eq $key">select</if>" href="javascript:;" data-type="wage" data-code="{$key}" data-title="{$wage}">{$wage}</a></li>
+           </volist>
+			    </div>
+		    </div>
+		    <div class="f-box f-box-exp">
+			    <div class="f-box-inner">
+				    <li><a class="f-item f-item-normal <if condition="$Think.get.experience eq 0">select</if>" href="javascript:;" data-type="exp" data-code="0" data-title="不限">不限</a></li>
+            <volist name="experience_list" id="experience">
+                <li><a class="f-item f-item-normal <if condition="$Think.get.experience eq $key">select</if>" href="javascript:;" data-type="exp" data-code="{$key}" data-title="{$experience}">{$experience}</a></li>
+            </volist>
+            </div>
+		    </div>
+		    <div class="f-box f-box-more">
+			    <div class="f-box-inner">
+				    <ul class="arrow">
+					    <li class="clicked">过滤已投递<span><span class="clickedbox js-clickedbox"></span></span></li>
+					    <li><a href="javascript:;" data-id="filter-nature" class="js-more-l">工作性质<span class="choice f-more-l-txt-nature">{$nature_list[$_GET['nature']]|default="不限"}</span></a></li>
+					    <li><a href="javascript:;" data-id="filter-edu" class="js-more-l">学历要求<span class="choice f-more-l-txt-edu">{$education_list[$_GET['education']]|default="不限"}</span></a></li>
+					    <li><a href="javascript:;" data-id="filter-tag" class="js-more-l">福利待遇<span class="choice f-more-l-txt-tag">{$tag_list[$_GET['jobtag']]|default="不限"}</span></a></li>
+					    <li><a href="javascript:;" data-id="filter-trade" class="js-more-l">行业<span class="choice f-more-l-txt-trade">{$trade_list[$_GET['trade']]|default="不限"}</span></a></li>
+					    <li><a href="javascript:;" data-id="filter-settr" class="js-more-l">更新时间<span class="choice f-more-l-txt-settr">
+					    	<switch name="_GET['settr']">
+					    		<case value="">不限</case>
+					    		<case value="0">不限</case>
+								<case value="3">3天内</case>
+								<case value="7">7天内</case>
+								<case value="15">15天内</case>
+								<case value="30">30天内</case>
+							</switch>
+					    </span></a></li>
+				    </ul>
+			    </div>
+			    <div class="f-btn-submit qs-center"><div href="javascript:;" class="qs-btn qs-btn-inline qs-btn-small qs-btn-orange" id="f-do-filter"> 筛 选 </div></div>
+			    <div class="f-btn-back qs-center"><div href="javascript:;" class="qs-btn qs-btn-inline qs-btn-small qs-btn-orange f-more-back-btn"> 返 回 </div></div>
+		    </div>
+	      <div class="f-box f-more-content" id="filter-nature">
+		      <div class="f-box-inner">
+			      <ul>
+				      <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.nature eq 0">select</if>" data-type="nature" data-title="不限" data-code="0">不限</a></li>
+              <volist name="nature_list" id="nature">
+                <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.nature eq $key">select</if>" data-type="nature" data-title="{$nature}" data-code="{$key}">{$nature}</a></li>
+              </volist>
+			      </ul>
+		      </div>
+	      </div>
+		    <div class="f-box f-more-content" id="filter-edu">
+			    <div class="f-box-inner">
+				    <ul>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.education eq 0">select</if>" data-type="edu" data-title="不限" data-code="0">不限</a></li>
+              <volist name="education_list" id="education">
+                <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.education eq $key">select</if>" data-type="edu" data-title="{$education}" data-code="{$key}">{$education}</a></li>
+              </volist>
+				    </ul>
+			    </div>
+		    </div>
+		    <div class="f-box f-more-content" id="filter-tag">
+			    <div class="f-box-inner">
+				    <ul>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.jobtag eq 0">select</if>" data-type="tag" data-title="不限" data-code="0">不限</a></li>
+              <volist name="tag_list" id="tag">
+                <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.jobtag eq $key">select</if>" data-type="tag" data-title="{$tag}" data-code="{$key}">{$tag}</a></li>
+              </volist>
+				    </ul>
+			    </div>
+		    </div>
+		    <div class="f-box f-more-content" id="filter-trade">
+			    <div class="f-box-inner">
+				    <ul>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.trade eq 0">select</if>" data-type="trade" data-title="不限" data-code="0">不限</a></li>
+              <volist name="trade_list" id="trade">
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.trade eq $key">select</if>" data-type="trade" data-title="{$trade}" data-code="{$key}">{$trade}</a></li>
+              </volist>
+				    </ul>
+			    </div>
+		    </div>
+		    <div class="f-box f-more-content" id="filter-settr">
+			    <div class="f-box-inner">
+				    <ul>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.settr eq 0">select</if>" data-type="settr" data-title="不限" data-code="0">不限</a></li>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.settr eq 3">select</if>" data-type="settr" data-title="3天内" data-code="3">3天内</a></li>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.settr eq 7">select</if>" data-type="settr" data-title="7天内" data-code="7">7天内</a></li>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.settr eq 15">select</if>" data-type="settr" data-title="15天内" data-code="15">15天内</a></li>
+              <li class="selected"><a href="javascript:;" class="f-more-back-a <if condition="$Think.get.settr eq 30">select</if>" data-type="settr" data-title="30天内" data-code="30">30天内</a></li>
+				    </ul>
+			    </div>
+		    </div>
+    </div>
+</div>
+<div class="list-split-block lower"></div>
+<if condition="$Think.get.jobcategory neq ''">
+	<div class="list-jobcategory-block font13">
+		<div class="l-recover-job-txt">当前在  <span class="l-cetgory">{$jobs_cate_info['spell'][$_GET['jobcategory']]['categoryname']}</span> 分类下</div>
+		<div class="l-recover-close js-clearjob-jobcategory">清空分类</div>
+	</div>
+</if>
+<qscms:jobs_list 列表名="jobslist" 搜索类型="$_GET['search_type']" 搜索内容="$_GET['search_cont']" 显示数目="20" 分页显示="1" 关键字="$_GET['key']" 职位分类="$_GET['jobcategory']" 地区分类="$_GET['citycategory']" 行业="$_GET['trade']" 日期范围="$_GET['settr']" 学历="$_GET['education']" 工作经验="$_GET['experience']" 工资="$_GET['wage']" 职位性质="$_GET['nature']" 标签="$_GET['jobtag']" 公司规模="$_GET['scale']" 营业执照="$_GET['license']" 过滤已投递="$_GET['deliver']" 排序="$_GET['sort']" 合并="$_COOKIE['com_list']" 描述长度="100" 搜索范围="$_GET['range']"/>
+
+
+<notempty name="jobslist['list']">
+<volist name="jobslist['list']" id="jobs">
+<div class="job-list-item for-event" onclick="javascript:location.href='{$jobs.jobs_url}'">
+    <div class="info">
+        <div class="com-logo" style=" width:1.3rem; height: 1.3rem; float: left; background:url(http://p.xiangcaozhaopin.com/3342767411529.png@118w_118h.src) center no-repeat; margin-top: 0.1rem; margin-left: -0.2rem; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; position: relative; background-size: 1.3rem auto; display: block;"></div>
+        <div class="line-one" style=" ">
+            <div class="job-name substring font16" style="font-size: 0.32rem; padding-left: 0.2rem;">{$jobs.jobs_name}
+            <if condition="$jobs['emergency'] eq 1">
+                <img src="../public/images/231.png"/>
+            </if>
+            </div>
+            <if condition="$jobs['stick'] eq 1 && (($_GET['search_type'] eq 'jobs' or $_GET['search_type'] eq 'company' or $_GET['key'] eq '') && !$_GET['sort'])">
+            <div class="refresh-time font12 font_red_light">置顶</div>
+            <else />
+                <div class="refresh-time font12" style=" color: #ff6600; margin-bottom: 0.3rem;">{$jobs['wage_cn']}</div>
+            </if>
+            <div class="clear"></div>
+        </div>
+        <div class="line-two font14" style="font-size: 0.28rem; font-size: 0.2rem; ">
+            <div class="category substring" style=" line-height: 0.4rem; padding-left: 0.2rem; ">{$jobs.companyname}</div>
+            <div class="salary" style=" line-height: 0.4rem; padding-left: 0.2rem; width: 60%; color: #999999;">{$jobs.district_cn}&nbsp;|&nbsp;{$jobs.education_cn}&nbsp;|&nbsp;{$jobs.experience_cn}</div>
+            <div class="clear"></div>
+        </div>
+        <empty name="jobs['tag_cn']">
+        <div class="line-four font13">
+            {$jobs.education_cn} / {$jobs.experience_cn} / 年龄{$jobs['age_cn']}
+        </div>
+        <else />
+            <div class="clear"></div>
+        <div class="line-three font12" >
+            <volist name="jobs['tag_cn']" id="tag" offset="0" length="4">
+            <div class="job-tag"style="font-size: 0.01rem;">{$tag}</div>
+            </volist>
+            <div class="clear"></div>
+        </div>
+        </empty>
+        <div class="apply-btn apply_jobs" data-jid="{$jobs['id']}" onClick="event.cancelBubble = true" >申请</div>
+        <!--<div style="font-size: 0.2rem; padding-top: 0.1rem;">申请人数:{$jobs.join_num}</div>-->
+    </div>
+    <div class="company font13" style="padding: 0.15rem; font-size: 0.2rem;">
+        <div class="company-name substring" style="padding-top: 0.05rem;">面试时间：<span style=" color: #ff6600;">{$jobs.mstime_cn}</span></div>
+        <!--<div class="district <if condition="$Think.get.range neq ''">range</if> substring"><if condition="$Think.get.range neq ''">{$jobs.map_range}<else />{$jobs.district_cn}</if></div>-->
+        <div class="district" style="font-size: 0.2rem; padding-top: 0.1rem;">申请人数111:{$jobs.join_num}</div>
+    <div class="clear"></div>
+    </div>
+</div>
+<div class="list-split-block"></div>
+</volist>
+
+<!--
+<div class="qspage">{$jobslist['page']}</div>
+ -->
+
+<else />
+    <div class="list-split-block"></div>
+    <div class="list-empty link_blue">
+        抱歉，没有找到符合您条件的职位！<br />
+        放宽搜索条件也许有更多合适您的职位哦~
+    </div>
+</notempty>
+
+<include file="public:footer_min" />
+
+<!--<script src="../public/js/inobounce.js"></script>-->
+<script src="../public/js/QSfilter.js"></script>
+<script src="../public/js/qsCategory.js"></script>
+</body>
+<script>
+	// 过滤已投递恢复
+	var recoverDeliver = '{$Think.get.deliver}';
+	if (eval(recoverDeliver)) {
+		$('.js-clickedbox').addClass('clickedchoice');
+	}
+	// 更多列表左右切换
+	 $('.js-more-l').on('click', function () {
+		 var targetId = $(this).data('id');
+		 $('.f-box-more').toggleClass('qs-actionsheet-toggle-left');
+		 $('#' + targetId).toggleClass('qs-actionsheet-toggle');
+	 })
+	 $('.f-more-back-btn').on('click', function () { // 更多列表切换返回
+		 $('.f-box-more').toggleClass('qs-actionsheet-toggle-left');
+		 $('.f-more-content').removeClass('qs-actionsheet-toggle');
+	 })
+	 $('.f-more-back-a').on('click', function () { // 更多列表项点击
+	 	 var thisType = $(this).data('type');
+		 var thisTitle = $(this).data('title');
+		 var thisCode = $(this).data('code');
+		 $('.f-more-l-code-' + thisType).val(thisCode);
+		 $('.f-more-l-txt-' + thisType).text(thisTitle);
+		 $('.f-box-more').toggleClass('qs-actionsheet-toggle-left');
+		 $('.f-more-content').removeClass('qs-actionsheet-toggle');
+	 })
+		// 除更多和读取缓存之外的下拉列表
+	 $('.f-item-normal').on('click', function () {
+		 var thisType = $(this).data('type');
+		 var thisTitle = $(this).data('title');
+		 var thisCode = $(this).data('code');
+		 $('.f-normal-code-' + thisType).val(thisCode);
+		 $('.f-normal-txt-' + thisType).text(thisTitle);
+		 $('body').removeClass('filter-fixed');
+		 $('.f-box-' + thisType).addClass('qs-hidden');
+		 $('.js-filter').removeClass('active');
+		 $('#f-mask').hide();
+		 goPage();
+	 })
+	 // 过滤已投递
+	 $('.js-clickedbox').on('click', function () {
+		 if ($(this).hasClass('clickedchoice')) {
+		 	 $(this).removeClass('clickedchoice');
+			 $('.f-deliver').val('0');
+		 } else {
+			 $(this).addClass('clickedchoice');
+			 $('.f-deliver').val('1');
+		 }
+	 })
+	// 清空已选分类
+	$('.js-clearjob-jobcategory').on('click', function () {
+		$('.qs-recover-code-job').val('');
+		goPage();
+	})
+	 // 跳转方法
+	 function goPage() {
+		 var toSearchPage = $('.f-seach-page').val();
+		 window.location.href = qscms.root + toSearchPage + $('#searchForm').serialize();
+	 }
+		// 点击筛选
+		$('#f-do-filter').on('click', function () {
+			goPage();
+		});
+    var isVisitor = "{:C('visitor.uid')}";
+    $('.js-filter').on('click', function () {
+      var filter = new QSfilter($(this));
+	    document.getElementById('f-mask').ontouchstart = function(e){ e.preventDefault(); }
+    });
+    // 申请职位点击事件绑定
+    $(".apply_jobs").on('click',function(){
+      var url = "{:U('ajaxPersonal/resume_apply')}";
+      var jid = $(this).data('jid');
+      if ((isVisitor > 0)) {
+        $.getJSON(url,{jid:jid},function(result){
+          if(result.status==1){
+            qsToast({type:1,context: result.msg});
+          } else {
+            qsToast({type:2,context: result.msg});
+		return false;
+            
+          }
+        });
+      } else {
+          if (eval(qscms.smsTatus)) {
+              window.location.href=qscms.root+'?m=Mobile&c=AjaxPersonal&a=resume_add_dig&jid='+jid;
+          } else {
+              //window.location.href="{:url_rewrite('QS_login')}";
+			  window.location.href='{$jobs.jobs_url}';
+          }
+      }
+    });
+</script>
+</html>   
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

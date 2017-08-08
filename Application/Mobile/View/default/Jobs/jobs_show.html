@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <include file="public:meta"/>
+    <qscms:jobs_show 列表名="jobs_info" 职位id="$_GET['id']"/>
+    <link rel="stylesheet" href="../public/css/jobs.css">
+    
+    
+<script src="../public/layer/jquery-1.11.3.js" type="text/javascript"></script>
+<script src="../public/layer/layer.js" type="text/javascript"></script> 
+<link rel="stylesheet" href="../public/zpH5/style/reset.css" />
+<link rel="stylesheet" href="../public/zpH5/style/center.css" />
+<link rel="stylesheet" href="../public/zpH5/style/mui.poppicker.css" />
+<link rel="stylesheet" href="../public/zpH5/style/mui.picker.css" />
+<link rel="stylesheet" href="../public/zpH5/style/mui.dtpicker.css" />
+<script src="../public/zpH5/js/mui.min.js"></script>
+<script src="../public/zpH5/js/mui.picker.js"></script>
+<script src="../public/zpH5/js/mui.picker.all.js"></script>
+<script src="../public/zpH5/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script src="../public/zpH5/js/date.data-3.js" type="text/javascript" charset="utf-8"></script>
+<style>
+		.btn-boxs{
+			width: 100%;
+			overflow: hidden;
+			margin-top: 30px;
+		}
+		.btn-boxs li{
+			width: 42%;
+			float: left;
+			text-align: center;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			margin: 0 4% 4% 4%;
+			box-sizing:border-box;
+			-moz-box-sizing:border-box;	
+			-webkit-box-sizing:border-box;
+			padding: 8px 0;
+
+		}
+		.modal-overlay
+		{
+			position: fixed;/*absolute;*/
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    background: rgba(0, 0, 0, 0.4);
+		    z-index: 10000;
+		    visibility: hidden;
+		    opacity: 0;
+		    -webkit-transition-duration: 400ms; 
+		    -moz-transition-duration: 400ms;
+		    -ms-transition-duration: 400ms;
+		    -o-transition-duration: 400ms;
+		    transition-duration: 400ms; 
+		}
+		.modal.modal-in {
+			display: block;
+		    opacity: 1;
+		    -webkit-transition-duration: 400ms;
+		    -moz-transition-duration: 400ms;
+		    -ms-transition-duration: 400ms;
+		    -o-transition-duration: 400ms;
+		    transition-duration: 400ms;
+		    -webkit-transform: translate3d(0%, 0%, 0) scale(1);
+		    -moz-transform: translate3d(0%, 0%, 0) scale(1);
+		    -ms-transform: translate3d(0%, 0%, 0) scale(1);
+		    -o-transform: translate3d(0%, 0%, 0) scale(1);
+		    transform: translate3d(0%, 0%, 0) scale(1);
+		}
+		.modal {
+			display: none;
+		    width: 270px;
+		    position: fixed;
+		    z-index: 11000;
+		    left: 50%;
+		    margin-left: -135px;
+		    margin-top: 0;
+		    top: 50%;
+		    text-align: center;
+		    border-radius: 7px;
+		    opacity: 0;
+		    -webkit-transform: translate3d(0%, 0%, 0) scale(1.185);
+		    -moz-transform: translate3d(0%, 0%, 0) scale(1.185);
+		    -ms-transform: translate3d(0%, 0%, 0) scale(1.185);
+		    -o-transform: translate3d(0%, 0%, 0) scale(1.185);
+		    transform: translate3d(0%, 0%, 0) scale(1.185);
+		    -webkit-transition-property: -webkit-transform, opacity;
+		    -moz-transition-property: -moz-transform, opacity;
+		    -ms-transition-property: -ms-transform, opacity;
+		    -o-transition-property: -o-transform, opacity;
+		    transition-property: transform, opacity;
+		}
+		.modal-inner {
+		    padding: 15px;
+		    border-bottom: 1px solid #b5b5b5;
+		    border-radius: 7px 7px 0 0;
+		    background: #e8e8e8;
+		}
+		.modal-title {
+		    font-weight: 500;
+		    line-height: 36px;
+		    font-size: 18px;
+		    text-align: center;
+		}
+		.modal-buttons {
+		    height: 44px;
+		    overflow: hidden;
+		    display: -webkit-box;
+		    display: -moz-box;
+		    display: -ms-flexbox;
+		    display: -webkit-flex;
+		    display: flex;
+		    -webkit-justify-content: center;
+		    -moz-justify-content: center;
+		    -ms-justify-content: center;
+		    justify-content: center;
+		    border-radius: 0 0 7px 7px;
+		}
+	.modal-button {
+	    width: 100%;
+	    padding: 0 5px;
+	    height: 44px;
+	    font-size: 17px;
+	    line-height: 44px;
+	    text-align: center;
+	    color: #007aff;
+	    background: #e8e8e8;
+	    display: block;
+	    position: relative;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	    cursor: pointer;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	    border-right: 1px solid #b5b5b5;
+	}
+	.modal-button:last-child {
+	    border-right: none;
+	    border-radius: 0px 0px 7px 0px;
+	}
+	</style>
+</head>
+<body>
+<include file="public:header"/>
+	<!-- 按钮div -->
+<div class="modal-overlay"></div>
+<div class="modal" style="margin-top: -99px;">
+	<div class="modal-inner">
+		<div class="modal-title">您确定要申请该职位吗?</div>
+	</div>
+	<div class="modal-buttons">
+		<span class="modal-button modal-button1">取消</span>
+		<span class="modal-button modal-button-bold modal-button-bold1">确定</span>
+	</div>
+</div>
+<div class="jobsshowtop">
+  <div class="jobsname font18">{$jobs_info.jobs_name}
+      <if condition="$jobs_info['emergency'] eq 1">
+          <img src="../public/images/231.png"/>
+      </if>
+  </div>
+  <div class="wage font18">{$jobs_info.wage_cn}</div>
+  <div class="city font14">{$jobs_info.district_cn}</div>
+  <div class="time font12">{$jobs_info['refreshtime_cn']}</div>
+</div>
+
+
+<div class="jobsshowatt">
+  <div class="attul">
+  	<div class="attli t1">性别{$jobs_info.sex_cn}</div>
+	<div class="attli t2"><if condition="$jobs_info.education eq 0">学历不限<else />{$jobs_info.education_cn}</if></div>
+	<div class="attli t3"><if condition="$jobs_info.experience eq 0">经验不限<else />{$jobs_info.experience_cn}</if></div>
+	<div class="attli t4">{$jobs_info.nature_cn}</div>
+	<div class="attli t5"><if condition="$jobs_info.age_cn eq '不限'">年龄不限<else />{$jobs_info.age_cn}</if></div>
+	<div class="attli t6"><if condition="$jobs_info['department']">{$jobs_info.department}<else />部门不限</if></div>
+	  <div class="attli t7"><if condition="$jobs_info['mstime']">面试时间 {$jobs_info.mstime_cn}<else />面试时间不限</if></div>
+	<div class="clear"></div>
+  </div>
+</div>
+
+<if condition="$jobs_info['tag_cn']">
+<div class="split-block"></div>
+<div class="jobsshowtag font13">
+  <div class="tagul">
+  <volist name="jobs_info['tag_cn']" id="tag">
+    <div class="tagli substring">{$tag}</div>
+  </volist>
+	<div class="clear"></div>
+  </div>
+</div>
+</if>
+<div class="split-block"></div>
+
+<div class="jobsshowcom" onclick="javascript:location.href='{$jobs_info.company_url}'">
+  	<div class="leftpic">
+		<div class="imgbox"><img src="{$jobs_info.company.logo}"></div>
+	</div>
+    <div class="comtxt">
+	  	<div class="cname font15 substring">{$jobs_info.company.companyname}
+            <if condition="$jobs_info['company']['audit'] eq 1"><img src="../public/images/120.png" title="认证企业"></if>
+            <if condition="$jobs_info['company']['setmeal_id'] gt 1"><img src="../public/images/121.png" title="{$info.setmeal_name}"></if>
+            <if condition="$jobs_info['company']['famous'] eq 1"><img src="../public/images/122.png" title="诚聘通企业"></if>
+        </div>
+        <div class="city font12">{$jobs_info.company.scale_cn}  | {$jobs_info.company.nature_cn}</div>
+		<div class="trade font12">{$jobs_info.company.trade_cn}</div>
+    </div>
+	<div class="clear"></div>
+  
+</div>
+
+
+
+<div class="jobsshowadder link_gray6">
+    <div class="adder">
+    <if condition="$jobs_info['map_x'] gt 0 && $jobs_info['map_y'] gt 0">
+        <a class="show-map" href="#map">地址：{$jobs_info.company.address}<img src="../public/images/123.png"></a>
+    <else />
+        地址：{$jobs_info.company.address}
+    </if>
+    </div>
+</div>
+
+<div class="split-block"></div>
+
+<div class="jobsshowst">
+  <div class="eattitle list_height">
+  职位统计
+    <div class="ritle font12">企业最近登录: {$jobs_info.company.last_login_time}</div>
+  </div>
+
+  <div class="stli"><span>{$jobs_info.company.reply_ratio}%</span><br>简历处理率</div>
+  <div class="stli"><span>{$jobs_info.company.reply_time}</span><br>简历平均处理时长</div>
+  <div class="clear"></div>
+</div>
+
+<div class="split-block"></div>
+<div class="jobsshowsbsj jobsshowsdes">
+	<div class="eattitle list_height">上班时间</div>
+
+	<div class="tagul">
+	 {$jobs_info.sbsj|strtotags}
+<div class="clear"></div>
+	</div>
+</div>
+
+<div class="jobsshowsdes">
+	<div class="eattitle list_height">工作要求</div>
+	<div class="txt">{$jobs_info.gzyq}</div>
+</div>
+<div class="jobsshowsdes">
+	<div class="eattitle list_height">晋升空间</div>
+	<div class="txt">{$jobs_info.jskj}</div>
+</div>
+<div class="jobsshowsdes">
+	<div class="eattitle list_height">每月能拿多少钱</div>
+	<div class="txt">{$jobs_info.mydsq}</div>
+</div>
+<div class="jobsshowsdes">
+	<div class="eattitle list_height">工作职责</div>
+	<div class="txt">{$jobs_info.gzzz}</div>
+</div>
+<div class="jobsshowsdes">
+  <div class="eattitle list_height">职位描述</div> 
+  <div class="txt">{$jobs_info.contents}</div>
+</div>
+
+<div class="split-block"></div>
+
+
+<div class="jobsshowcon">
+  <div class="eattitle list_height">
+  联系方式
+    <if condition="!C('visitor.utype')">
+      <div class="ritle font12" onclick="javascript:location.href='{:U('members/login')}'">请登录后查看联系方式</div>
+    </if>
+  </div>
+  <if condition="$jobs_info['contact']['telephone_show'] eq 0">
+  <div class="mob">企业设置不公开</div>
+  <else />
+  <div class="mob">{$jobs_info.contact.telephone} 
+  <if condition="$jobs_info['contact']['contact_show'] eq 1">({$jobs_info.contact.contact})</if>
+  </div>
+  </if>
+  <div class="map link_blue">{$jobs_info.contact.address} <if condition="$jobs_info['map_x'] gt 0 && $jobs_info['map_y'] gt 0"><a class="show-map" href="#map">[地图]</a></if></div>
+  <if condition="$jobs_info['company']['famous'] eq 1">
+  <div class="tip font12">该企业已加入诚聘通会员，可放心求职</div>
+  <else />
+   <div class="tip font12">面试过程中，遇到用人单位收取费用请提高警惕！</div>
+  </if>
+  
+  <div class="big-box" style="padding-bottom:0px;">
+	<div class="center-box">
+		<h2>企业HR要求您完善以下简历基本信息</h2>
+		<form action="#">
+			<ul>
+				<li>
+					<label for="">姓名</label>
+					<div class="input-box">
+						<input type="text" name="name" placeholder="必填">
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">性别</label>
+					<div class="input-box">
+						<input type="text" name="sex" placeholder="" readonly="ture" id="showUserPicker">
+						<div class="puts_emalis" id="userResult" ></div>
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">出生日期</label>
+					<div class="input-box">
+						<input type="text" name="age" placeholder="" readonly="ture" id="showDatePicker3">
+						<div class="puts_emalis" id="dateResult3" ></div>
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">期待工作地</label>
+					<div class="input-box">
+						<input type="text" name="address" placeholder="" readonly="ture" id="showCityPicker3">
+						<div class="puts_emalis" id="cityResult3" ></div>
+					</div>
+				</li class="jt-cl">
+				<li class="jt-cl">
+					<label for="">学历</label>
+					<div class="input-box">
+						<input type="text" name="education" placeholder="" readonly="ture" id="showXuliPicker">
+						<div class="puts_emalis" id="xuliResult" ></div>
+					</div>
+				</li>
+				<li class="jt-cl">
+					<label for="">工作年限</label>
+					<div class="input-box">
+						<input type="text" name="year" placeholder="" readonly="ture" id="showyearPicker">
+						<div class="puts_emalis" id="yearResult" ></div>
+					</div>
+				</li>
+				<li>
+					<label for="">手机</label>
+					<div class="input-box">
+						<input type="tel" name="phone" placeholder="必填">
+					</div>
+				</li>
+				<li>
+					<label for="">验证码</label>
+					<div class="input-boxs">
+						<input type="text" name="code" placeholder="输入验证码">
+						<button type="button" id="codeBtn">获取验证码</button>
+					</div>
+				</li>
+			</ul>
+		</form>
+		<p>提示：您所填写的信息，会更新到您的简历中哦！</p>
+	</div>
+	<div class="hui-line"></div>
+</div>
+  
+</div>
+
+<qscms:jobs_list 列表名="jobslist" 显示数目="6" 职位分类="$jobs_info['jobcategory']" 去除id="$jobs_info['id']"/>
+<notempty name="jobslist['list']">
+<div class="split-block"></div>
+<div class="jobsshowrec">
+  <div class="eattitle list_height">
+  推荐职位
+    <div class="ritle font12 link_gray9"><a href="{:U('Jobs/index')}">查看更多></a></div>
+  </div>
+ <volist name="jobslist['list']" id="jobs">
+  <div class="jobslist">
+    <div class="jname font15 link_gray6 substring"><a href="{$jobs.jobs_url}">{$jobs.jobs_name}</a></div>
+	<div class="cname font12 substring">{$jobs.companyname} | {$jobs.district_cn}</div>
+	<div class="wage font13">{$jobs.wage_cn}</div>
+	<div class="time font12">{$jobs.refreshtime_cn}</div>
+  </div>
+  </volist>
+</div>
+<div class="jobssshowbottomso link_blue">没有找到满意的职位? <a href="{:U('Jobs/index')}">立即搜索</a></div>
+</notempty>
+
+
+<div class="split-block-footnav"></div>
+<!-- <neq name="jobs_info['tmp']" value="1">
+<div class="jobsfootnav">
+		<div class="btns link_gray6">
+		  <div class="qs-btn qs-btn-medium qs-btn-blue qs-btn-inline apply_jobs">投递简历</div>
+      <if condition="$jobs_info['contact']['telephone_show'] eq 0">
+      <a href="javascript:;" class="J_tel tel font9 hide_tel"><img src="../public/images/130.png"><br>
+拨打电话</a>
+      <else />
+		  <a href="tel:<if condition='$jobs_info["contact"]["telephone_"]'>{$jobs_info["contact"]["telephone_"]}<else />{$jobs_info["contact"]["landline_tel"]}</if>" class="J_tel tel font9"><img src="../public/images/130.png"><br>
+拨打电话</a>
+      </if>
+      <div class="fov font9 favor">
+      <if condition="$jobs_info['favor']">
+		    <img src="../public/images/175.png"><br>已收藏
+      <else />
+        <img src="../public/images/131.png"><br>收藏职位
+      </if>
+      </div>
+  </div>
+</div>
+</neq> -->
+
+<div class="footer-fixed" style="z-index:10000">
+	<!-- <div class="share"><a class="text-c" href="javascript:void(0);"><i class="scd-share"></i>分享</a>
+	</div> -->
+	<div class="fov font9 favor share">
+      <if condition="$jobs_info['favor']">
+		    <img src="../public/images/175.png" style="width:32px;height:32px;margin-top:7px;"><br>已收藏
+      <else />
+        <img src="../public/images/131.png" style="width:32px;height:32px;margin-top:7px;"><br>收藏职位
+      </if>
+    </div>
+	<div class="scd-reserve">
+		<div class="foot-apply-interv">
+			<input name="jobid" value="{$jobs_info.id}" type="hidden">
+			<button type="button" class="interv-but responsive mobile_reg" style="line-height:30px;"><i></i>申请面试</button>
+		</div>
+	</div>
+</div>
+
+<script id="tpl-map" type="text/html">
+    <!--地图-->
+    <div class="headernavfixed">
+        <div class="headernav font18"><div class="title">企业位置<div class="return js-back"></div></div></div>
+    </div>
+    <div class="com-map">
+        <div class="map" id="container"></div>
+    </div>
+    <div class="split-block"></div>
+    <div class="btn-spacing">
+        <div id="mapBtn" class="qs-btn qs-btn-blue font18" title="返回">返回</div>
+    </div>
+</script>
+<include file="public:footer_min" />
+<script src="../public/js/popWin.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={:C('qscms_map_ak')}"></script>
+<script type="text/javascript">
+      $.getJSON("{:U('AjaxCommon/jobs_click')}",{id:"{$jobs_info.id}"});
+      var mapTemp = $('#tpl-map').html();
+      $(".show-map").on('click', function() {
+          var $this = $(this);
+          popWin.init({
+              from:"right",
+              html:mapTemp,
+              handle:function(a){
+                var map = new BMap.Map("container");
+                var point = new BMap.Point("{$jobs_info['map_x']}","{$jobs_info['map_y']}");  // 创建点坐标
+                map.centerAndZoom(point, "{$jobs_info['map_zoom']}");
+                var qs_marker = new BMap.Marker(point);        // 创建标注
+                map.addOverlay(qs_marker);
+                map.setCenter(point);
+                map.addControl(new BMap.NavigationControl());//添加鱼骨
+                map.enableScrollWheelZoom();//启用滚轮放大缩小，默认禁用。
+                $('#mapBtn').on('click',function(){
+                    a.close();
+                });
+              }
+          })
+      });
+  var isVisitor = "{:C('visitor.uid')}";
+  var utype = "{:C('visitor.utype')}";
+  // 收藏职位点击事件绑定
+    $(".favor").on('click',function(){
+      var obj = $(this);
+      var url = "{:U('ajaxPersonal/jobs_favorites')}";
+      var jid = "{$jobs_info['id']}";
+      if ((isVisitor > 0)) {
+        if(utype != 2){
+          qsToast({type:2,context: '请登录个人会员'});
+          return false;
+        }
+        $.getJSON(url,{jid:jid},function(result){
+          if(result.status==1){
+            qsToast({type:1,context: result.msg});
+            if(result.data=='cancel'){
+              obj.html('<img src="../public/images/131.png"><br>收藏职位');
+            }else{
+              obj.html('<img src="../public/images/175.png"><br>已收藏');
+            }
+          } else {
+            qsToast({type:2,context: result.msg});
+            return false;
+          }
+        });
+      } else {
+        window.location.href="{:U('members/login')}";
+        return false;
+      }
+    });
+    // 申请职位点击事件绑定
+    $(".apply_jobs").on('click',function(){
+      var url = "{:U('ajaxPersonal/resume_apply')}";
+      var jid = "{$jobs_info['id']}";
+      if ((isVisitor > 0)) {
+        if(utype != 2){
+          qsToast({type:2,context: '请登录个人会员'});
+          return false;
+        }
+        $.getJSON(url,{jid:jid},function(result){
+          if(result.status==1){
+            qsToast({type:1,context: result.msg});
+          } else {
+            qsToast({type:2,context: result.msg});
+            return false;
+          }
+        });
+      } else {
+          if (eval(qscms.smsTatus)) {
+              window.location.href=qscms.root+'?m=Mobile&c=AjaxPersonal&a=resume_add_dig&jid='+jid;
+          } else {
+              window.location.href="{:url_rewrite('QS_login')}";
+          }
+      }
+    });
+    $('.J_tel').on('click',function(){
+      if (isVisitor > 0) {
+          if(utype != 2){
+            qsToast({type:2,context: '请登录个人会员'});
+            return false;
+          }
+          if($(this.hasClass('hide_tel'))){
+              qsToast({type:2,context: '该企业设置联系方式不公开！'});
+              return false;
+          }
+      }else{
+          window.location.href="{:U('members/login')}";
+          return false;
+      }
+    });
+</script>
+<script>
+    // 性别
+    (function($, doc) {
+		$.init();
+		$.ready(function() {
+			//性别
+			var userPicker = new $.PopPicker();
+			userPicker.setData([
+			 {
+				text: "男"
+			}, {
+				
+				text: "女"
+			}]);
+			var showUserPickerButton = doc.getElementById("showUserPicker");
+			var userResult = doc.getElementById("userResult");
+			showUserPickerButton.addEventListener("tap", function(event) {
+				userPicker.show(function(items) {
+					userResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//学历
+			var userPicker1 = new $.PopPicker();
+			userPicker1.setData([
+	
+			 {
+				text: "高中"
+			},
+			 {
+				text: "中专"
+			},
+			 {
+				text: "大专"
+			},
+			 {
+				text: "本科"
+			},
+			{
+				text: "硕士"
+			},
+			 {
+				text: "博士"
+			}]);
+			var showXuliPickerButton = doc.getElementById("showXuliPicker");
+			var xuliResult = doc.getElementById("xuliResult");
+			showXuliPickerButton.addEventListener("tap", function(event) {
+				userPicker1.show(function(items) {
+					xuliResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+
+			//工作经验
+			var userPicker2 = new $.PopPicker();
+			userPicker2.setData([
+	
+			 {
+				text: "无经验"
+			},
+			 {
+				text: "一年以下"
+			},
+			 {
+				text: "1-2年"
+			},
+			 {
+				text: "2-3年"
+			},
+			{
+				text: "3-5年"
+			},
+			 {
+				text: "5年以上"
+			}]);
+			var showyearPickerButton = doc.getElementById("showyearPicker");
+			var yearResult = doc.getElementById("yearResult");
+			showyearPickerButton.addEventListener("tap", function(event) {
+				userPicker2.show(function(items) {
+					yearResult.innerText = items[0].text;
+					//返回 false 可以阻止选择框的关闭
+					//return false;
+				});
+			}, false);
+			//三轴联动
+				var cityPicker3 = new $.PopPicker({
+					layer: 3
+				});
+				cityPicker3.setData(cityData3);
+				var showCityPickerButton = doc.getElementById("showCityPicker3");
+				var cityResult3 = doc.getElementById("cityResult3");
+				showCityPickerButton.addEventListener("tap", function(event) {
+					cityPicker3.show(function(items) {
+						cityResult3.innerText =  (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			//日期
+				
+				var dtpicker = new mui.DtPicker({  
+				    type: "date",//设置日历初始视图模式  
+				    beginDate: new Date(1949, 10, 01),//设置开始日期  
+				    endDate: new Date(2088, 12, 25),//设置结束日期  
+				    labels: ["年", "月", "日", "时", "分"],//设置默认标签区域提示语  
+				    customData: {  
+				        h: [{  
+				            value: "AM",  
+				            text: "AM"  
+				        }, {  
+				            value: "PM",  
+				            text: "PM"  
+				        }]  
+				    }//时间/日期别名  
+				})  
+ 
+				var showDatePickerButton = doc.getElementById("showDatePicker3");
+				var dateResult3 = doc.getElementById("dateResult3");
+				showDatePickerButton.addEventListener("tap", function(event) {
+					dtpicker.show(function(items) {
+						dateResult3.innerText =  items.y.text + "-" + items.m.text + "-" + items.d.text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+			});
+		})
+	(mui, document);
+   
+</script>
+<script>                   
+			   $(function() {
+			     //申请提交
+			     $('.responsive').on("click",function(){
+        			$(".modal-overlay").css({"visibility":"visible","opacity":"1"});
+			        $(".modal").addClass("modal-in");
+        		});
+			        
+			        $(".modal-button1").on("click",function(){
+            			$(".modal-overlay").css({"visibility":"hidden","opacity":"0"});
+            			$(".modal").removeClass("modal-in");
+            		});
+			        
+			        
+			     $('.modal-button-bold1').on('click', function() {
+			        $(".modal-overlay").css({"visibility":"hidden","opacity":"0"});
+            		$(".modal").removeClass("modal-in");
+			        
+				    var name = $("input[name=name]").val();
+				    var sex  = $("#userResult").html();
+                    var age  = $("#dateResult3").html();
+                    var address = $("#cityResult3").html();
+                    var education = $("#xuliResult").html();
+                    var year  = $("#yearResult").html();
+                    var phone = $("input[name=phone]").val();
+                    var code  = $("input[name=code]").val();
+                    var jobid = $("input[name=jobid]").val();
+			        
+				    $.post("{:U('jobs/ajaxshow')}",{name:name,sex:sex,age:age,address:address,education:education,year:year,phone:phone,code:code,jobid:jobid},function(data){
+				    	if($.trim(data)=="1")
+    					{
+    			            layer.msg('信息不完整', {icon: 2});
+    					}
+    					else if($.trim(data)=="2")
+    					{
+    			            layer.msg('系统繁忙', {icon: 2});
+    					}
+			            else if($.trim(data)=="3")
+    					{
+    			            layer.msg('姓名长度为2-5个字符', {icon: 2});
+    					}
+			            else if($.trim(data)=="4")
+    					{
+    			            layer.msg('验证码错误', {icon: 2});
+    					}
+			            else if($.trim(data)=="5")
+    					{
+    			            layer.msg('验证码过期', {icon: 2});
+    					}
+    					else if ($.trim(data)=="6")
+    					{
+    			            layer.msg('申请成功，等待审核', {icon: 1});
+    						setTimeout(function () {
+    			                 window.location.href="{:U('jobs/applylogin')}";
+    		                     //window.location.reload();
+    		                }, 2000);
+    					} else {
+    						layer.msg('系统繁忙', {icon: 2});
+    						setTimeout(function () {
+    		                     window.location.reload();
+    		                }, 2000);
+    					}
+				  })
+			    });
+			                         
+			                         
+    			//发送验证码
+    			$('#codeBtn').on('click', function() {
+    				$.post("{:U('jobs/ajax_send_code')}", {phone:$("input[name=phone]").val()}, function(data) {
+			            if ($.trim(data) == 1) {
+			                 layer.msg('手机号为空或格式错误！', {icon: 2});
+			            } else if ($.trim(data) == 2) {
+			            	layer.msg('请60秒后再进行验证！', {icon: 2});
+			            } else {
+			                 showTime(60);
+			                 $('.mobile_reg').removeAttr("disabled");
+			            }
+    				});
+    			});
+        
+			 });
+			                         
+			                         
+			                         
+			function showTime(time){
+    			$('#codeBtn').prop('disabled', true);
+    
+    			for (var i = 0; i <= time; i++) {
+    				window.setTimeout("updateP("+ i +","+time+")", i*1000);
+    			};
+    		};
+    		function updateP(num, time) {
+    			if(num == time) {
+    				$('#codeBtn').html('重新发送').prop('disabled', false);
+    			}else{
+    				var printnr = time - num;
+    				$('#codeBtn').html(printnr +"秒重新发送");
+    			}
+    		}
+			                         
+			                         
+			 </script>   
+</body>
+</html>
+        
+        
